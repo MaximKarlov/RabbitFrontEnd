@@ -45,8 +45,8 @@ export const Layout = () => {
           </NavLink>
         </li>
         <li className={CSS.layout_item}>
-          <NavLink to="/contacts" className={CSS.linked}>
-            PHONEBOOK
+          <NavLink to="/rabbits" className={CSS.linked}>
+            RABBITS
           </NavLink>
         </li>
         {isLoggedIn ? (
@@ -55,7 +55,13 @@ export const Layout = () => {
               Вітаємо вас, {userLogged} <img src={avatar} alt="ava" width="32" className={CSS.avatar} />
             </span> */}
             <div>
-              <Box sx={{ display: 'flex', alignItems: 'center', textAlign: 'center' }}>
+              <Box
+                sx={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  textAlign: 'center',
+                }}
+              >
                 <Tooltip title="Account settings">
                   <IconButton
                     onClick={handleClick}
@@ -65,7 +71,11 @@ export const Layout = () => {
                     aria-haspopup="true"
                     aria-expanded={open ? 'true' : undefined}
                   >
-                    <Chip avatar={<Avatar alt={userLogged} src={avatar} />} label={userLogged} variant="outlined" />
+                    <Chip
+                      avatar={<Avatar alt={userLogged} src={avatar} />}
+                      label={userLogged}
+                      variant="outlined"
+                    />
                   </IconButton>
                 </Tooltip>
               </Box>

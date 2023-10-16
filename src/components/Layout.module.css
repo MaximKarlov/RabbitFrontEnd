@@ -8,7 +8,7 @@
 .linked:hover,
 .linked:focus {
   cursor: pointer;
-  color: blue;
+  color: rgb(13, 13, 18);
 }
 .active {
   color: red;

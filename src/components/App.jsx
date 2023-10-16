@@ -10,6 +10,8 @@ const Home = lazy(() => import('../pages/Home'));
 const Register = lazy(() => import('../pages/Register'));
 const Login = lazy(() => import('../pages/Login'));
 const Rabbits = lazy(() => import('../pages/Rabbits'));
+const AddRabbit = lazy(() => import('../pages/AddRabbit'));
+const RabbitBreed = lazy(() => import('../pages/RabbitBreed'));
 
 export const App = () => {
   const dispatch = useDispatch();
@@ -35,9 +37,22 @@ export const App = () => {
               <RestrictedRoute redirectTo="/rabbits" component={<Login />} />
             }
           />
+
           <Route
             path="/rabbits"
             element={<PrivateRoute redirectTo="/" component={<Rabbits />} />}
+          />
+          <Route
+            path="/rabbits/addRabbit"
+            element={
+              <PrivateRoute redirectTo="/rabbits" component={<AddRabbit />} />
+            }
+          />
+          <Route
+            path="/rabbits/breedList"
+            element={
+              <PrivateRoute redirectTo="/rabbits" component={<RabbitBreed />} />
+            }
           />
         </Route>
       </Routes>

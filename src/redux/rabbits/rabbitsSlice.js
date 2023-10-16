@@ -19,6 +19,9 @@ const rabbitsSlice = createSlice({
       .addCase(fetchRabbits.pending, (state, _) => {
         state.isLoading = true;
       })
+      .addCase(fetchRabbits.rejected, (state, action) => {
+        state.error = true;
+      })
       .addCase(addContact.fulfilled, (state, action) => {
         state.items.push(action.payload);
         state.isLoading = false;
