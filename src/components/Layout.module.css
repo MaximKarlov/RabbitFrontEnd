@@ -1,0 +1,59 @@
+.linked .active {
+  color: red;
+}
+.linked {
+  text-decoration: none;
+  color: black;
+}
+.linked:hover,
+.linked:focus {
+  cursor: pointer;
+  color: blue;
+}
+.active {
+  color: red;
+}
+/* .linked:visited {
+    color: black;
+} */
+/* .linked:focus {
+    color: tomato;
+} */
+
+.layout_items {
+  display: flex;
+  padding: 10px;
+  border-bottom: 1px solid gray;
+  list-style: none;
+  justify-content: space-between;
+  align-items: center;
+}
+.layout_item {
+  padding: 0px 20px;
+}
+.active {
+  color: yellow;
+}
+.tmp {
+  display: flex;
+  align-items: center;
+}
+.avatar {
+  margin-left: 10px;
+}
+
+.regLogItems {
+  display: flex;
+  width: 200px;
+  justify-content: space-between;
+  list-style: none;
+}
+.userInfo {
+  display: flex;
+  gap: 30px;
+  align-items: center;
+}
+
+.btn {
+  margin-left: 30px;
+}
