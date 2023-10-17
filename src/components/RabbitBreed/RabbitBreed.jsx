@@ -2,7 +2,10 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Loader } from '../Loader/Loader';
 import { useEffect, useState } from 'react';
 import RabbitBreedItems from '../RabbitBreed/RabbitBreedItems';
-import { fetchRabbitsBreed } from '../../redux/rabbits/rabbitsOperation';
+import {
+  fetchRabbitsBreed,
+  addRabbitBreed,
+} from '../../redux/rabbits/rabbitsOperation';
 import Modal from 'react-modal';
 import { TextField } from '@mui/material';
 import {
@@ -11,8 +14,14 @@ import {
 } from '../../redux/rabbits/rabbitsSelector';
 import RBCSS from './RabbitBreed.module.css';
 
+let result;
+
 export const RabbitBreedList = () => {
+  const [nameBreed, setNameBreed] = useState('');
+  const [colorBreed, setColorBreed] = useState('');
+  const [aboutBreed, setAboutBreed] = useState('');
   const [modalIsOpen, setIsOpen] = useState(false);
+
   const dispatch = useDispatch();
 
   const customStyles = {
@@ -41,9 +50,39 @@ export const RabbitBreedList = () => {
   const breed = useSelector(getRabbitsBreed);
   const isLoading = useSelector(getIsLoading);
 
+  console.log('breed', breed);
+
   useEffect(() => {
     dispatch(fetchRabbitsBreed());
   }, [dispatch]);
+
+  useEffect(() => {
+    console.log('result', result);
+  }, [dispatch]);
+
+  const handleChangeName = event => {
+    setNameBreed(event.target.value);
+  };
+  const handleChangeColor = event => {
+    setColorBreed(event.target.value);
+  };
+
+  const handleChangeAbout = event => {
+    setAboutBreed(event.target.value);
+  };
+
+  const onSubmit = e => {
+    e.preventDefault();
+
+    const objectsToSend = {
+      name: nameBreed,
+      color: colorBreed,
+      about: aboutBreed,
+    };
+    dispatch(addRabbitBreed(objectsToSend)).then(el =>
+      el.payload === 201 ? setIsOpen(false) : setIsOpen(true)
+    );
+  };
 
   return (
     <div>
@@ -60,20 +99,33 @@ export const RabbitBreedList = () => {
         >
           <h2 className={RBCSS.modalTitle}>Add Breed Rabbit</h2>
 
-          <form className={RBCSS.modalInputs}>
+          <form className={RBCSS.modalInputs} onSubmit={onSubmit}>
             <TextField
               id="nameBreed"
               label="Name Breed"
               variant="outlined"
-              sx={{
-                fontSize: 16,
-                fontWeight: 900,
-              }}
+              inputProps={{ style: { fontSize: 22 } }}
+              InputLabelProps={{ style: { fontSize: 16 } }}
+              onChange={handleChangeName}
             />
-            <TextField id="ColorBreed" label="Color Breed" variant="outlined" />
-            <TextField id="AboutBreed" label="About Breed" multiline />
+            <TextField
+              id="ColorBreed"
+              label="Color Breed"
+              variant="outlined"
+              inputProps={{ style: { fontSize: 22 } }}
+              InputLabelProps={{ style: { fontSize: 16 } }}
+              onChange={handleChangeColor}
+            />
+            <TextField
+              id="AboutBreed"
+              label="About Breed"
+              multiline
+              inputProps={{ style: { fontSize: 22 } }}
+              InputLabelProps={{ style: { fontSize: 16 } }}
+              onChange={handleChangeAbout}
+            />
             <div className={RBCSS.modalButtons}>
-              <button onClick={closeModal}>Add</button>
+              <button type="submit">Add</button>
               <button onClick={closeModal}>Close</button>
             </div>
           </form>

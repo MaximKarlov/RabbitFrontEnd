@@ -48,6 +48,27 @@ export const fetchRabbitsBreed = createAsyncThunk(
   }
 );
 
+export const addRabbitBreed = createAsyncThunk(
+  'rabbit/addRabbitBreed',
+  async (breed, thunkAPI) => {
+    const state = thunkAPI.getState();
+    const persistToken = state.auth.token;
+    token.set(persistToken);
+
+    try {
+      const { status } = await axios.post('rabbits/breeds/add', breed);
+      if (status === 201)
+        Notiflix.Notify.success(
+          `Породу додано у базу! ${'\n'} The Breed was successfully created.`
+        );
+      return status;
+    } catch (err) {
+      Notiflix.Notify.failure(err.message);
+      return err.message;
+    }
+  }
+);
+
 export const addContact = createAsyncThunk(
   'contacts/addContact',
   async (contact, thunkAPI) => {

@@ -30,10 +30,10 @@ export default function RabbitBreedItems({ BreedList }) {
         columns={columns}
         initialState={{
           pagination: {
-            paginationModel: { page: 0, pageSize: 5 },
+            paginationModel: { page: 0, pageSize: 20 },
           },
         }}
-        pageSizeOptions={[5, 10]}
+        pageSizeOptions={[5, 10, 20, 50]}
         checkboxSelection
       />
     </div>
