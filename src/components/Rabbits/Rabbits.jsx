@@ -2,12 +2,12 @@ import { useSelector, useDispatch } from 'react-redux';
 import { RabbitsItem } from './Rabbits_item';
 import { Loader } from '../Loader/Loader';
 import { useEffect } from 'react';
-import Notiflix from 'notiflix';
+
 import { fetchRabbits } from '../../redux/rabbits/rabbitsOperation';
 // import RabbitsCss from './Rabbits.module.css';
 import {
   getRabbits,
-  getError,
+  // getError,
   getIsLoading,
 } from '../../redux/rabbits/rabbitsSelector';
 
@@ -18,27 +18,16 @@ export const RabbitList = () => {
   const { rabbits } = useSelector(getRabbits);
   // const breed = useSelector(getRabbitsBreed);
   const isLoading = useSelector(getIsLoading);
-  const error = useSelector(getError);
+  // const error = useSelector(getError);
 
   useEffect(() => {
     dispatch(fetchRabbits());
   }, [dispatch]);
 
   const options = rabbits;
+  console.log('options', options);
 
   return (
-    <div>
-      {isLoading ? (
-        <Loader />
-      ) : error == null ? (
-        options.length !== 0 ? (
-          <RabbitsItem Rabbits={rabbits} />
-        ) : (
-          Notiflix.Notify.failure(
-            'Ще не додано жодного кролика. Будь ласка додайте кролика!!!'
-          )
-        )
-      ) : null}
-    </div>
+    <div>{isLoading ? <Loader /> : <RabbitsItem Rabbits={rabbits} />}</div>
   );
 };

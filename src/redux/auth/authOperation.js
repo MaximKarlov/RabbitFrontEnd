@@ -38,7 +38,7 @@ export const registerUser = createAsyncThunk(
   'auth/registration',
   async (user, { rejectWithValue }) => {
     try {
-      const { data, status } = await axios.post('/users/signup', user);
+      const { data, status } = await axios.post('/users/register', user);
       if (status === 201)
         Notiflix.Notify.success('Юзер успішно зареєстрований');
       token.set(data.token);

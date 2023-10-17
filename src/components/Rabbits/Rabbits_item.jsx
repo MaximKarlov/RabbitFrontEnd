@@ -1,4 +1,6 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import Notiflix from 'notiflix';
+// import { getRabbits } from '../../redux/rabbits/rabbitsSelector';
 // import { nanoid } from 'nanoid';
 // import { useDispatch } from 'react-redux';
 // import { deleteContact } from '../../redux/rabbits/rabbitsOperation';
@@ -40,6 +42,13 @@ export const RabbitsItem = Rabbits => {
       favorite: el.favorite,
     })
   );
+  useEffect(() => {
+    console.log(Rabbits);
+    if (Rabbits.Rabbits.length === 0)
+      Notiflix.Notify.warning(
+        'Ще не додано жодного кролика. Будь ласка додайте кролика!!!'
+      );
+  }, [Rabbits]);
 
   // const rowsRabbit = JSON.stringify(Rabbits.Rabbits);
   // console.log(rowsRabbit);
@@ -57,25 +66,5 @@ export const RabbitsItem = Rabbits => {
         checkboxSelection
       />
     </div>
-
-    // <li id={id} key={id} className={RabbitsCss.contact_item}>
-    //   {/* <p>{<ContactPhoneIcon color="pink" />}</p> */}
-    //   {name} {gender} {breed} {dateBirthDay} {photoRabbit} {cage} {Mother}
-    //   {Father} {`${favorite}`}
-    //   {/* <button type="text" className={ContactCss.btn} onClick={edit}>
-    //     Edit
-    //   </button> */}
-    //   <Stack direction="row" spacing={2}>
-    //     <Button
-    //       variant="outlined"
-    //       startIcon={<DeleteIcon />}
-    //       type="text"
-    //       className={RabbitsCss.btn}
-    //       onClick={() => dispatch(deleteContact(id))}
-    //     >
-    //       Delete
-    //     </Button>
-    //   </Stack>
-    // </li>
   );
 };
