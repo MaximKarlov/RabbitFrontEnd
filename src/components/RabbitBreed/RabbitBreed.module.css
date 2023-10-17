@@ -3,3 +3,30 @@
   display: 'flex';
   justify-content: 'center';
 }
+.modalTitle {
+  text-align: center;
+  font-size: 48px;
+  color: chartreuse;
+}
+.modalInputs {
+  display: flex;
+  flex-direction: column;
+  font-size: 16px;
+  gap: 30px;
+  width: 650px;
+}
+
+.modalInputs button {
+  width: 300px;
+  height: 100px;
+  text-align: center;
+  text-transform: uppercase;
+  font-size: 28px;
+  font-weight: bold;
+  /* font-style: italic; */
+  font-family: 'Times New Roman', italic;
+}
+.modalButtons {
+  display: flex;
+  gap: 50px;
+}
