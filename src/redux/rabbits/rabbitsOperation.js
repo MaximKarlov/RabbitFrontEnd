@@ -20,12 +20,30 @@ export const fetchRabbits = createAsyncThunk(
     const persistToken = state.auth.token;
     token.set(persistToken);
     try {
-      const { data } = await axios.get('/api/rabbits');
+      const { data } = await axios.get('/rabbits');
       // console.log('data>>', data);
       return data;
     } catch (err) {
       Notiflix.Notify.failure(err.message);
       return err.message;
+    }
+  }
+);
+
+export const fetchRabbitsBreed = createAsyncThunk(
+  'rabbits/fetchBreedAll',
+  async (_, thunkAPI) => {
+    const state = thunkAPI.getState();
+    const persistToken = state.auth.token;
+    token.set(persistToken);
+    try {
+      const { data } = await axios.get('/rabbits/breeds');
+      return data;
+    } catch (err) {
+      if (err.response.status === 404) {
+        Notiflix.Notify.failure(err.message);
+        return err.message;
+      }
     }
   }
 );

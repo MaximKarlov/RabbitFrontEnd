@@ -9,6 +9,7 @@ import {
   getRabbits,
   getError,
   getIsLoading,
+  getRabbitsBreed,
 } from '../../redux/rabbits/rabbitsSelector';
 
 export const RabbitList = () => {
@@ -16,7 +17,7 @@ export const RabbitList = () => {
 
   // Отримуємо частини стану
   const { rabbits } = useSelector(getRabbits);
-  // const filter = useSelector(getFilter);
+  const breed = useSelector(getRabbitsBreed);
   const isLoading = useSelector(getIsLoading);
   const error = useSelector(getError);
 
@@ -28,6 +29,7 @@ export const RabbitList = () => {
 
   console.log('error!', error);
   console.log('options', options);
+  console.log('breed', breed);
   console.log('options.lenght!', options.length);
   return (
     <div>

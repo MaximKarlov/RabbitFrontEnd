@@ -1,8 +1,14 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { fetchRabbits, addContact, deleteContact } from './rabbitsOperation';
+import {
+  fetchRabbits,
+  fetchRabbitsBreed,
+  addContact,
+  deleteContact,
+} from './rabbitsOperation';
 
 const rabbitsInitialState = {
   rabbits: [],
+  breed: [],
   isLoading: false,
   error: null,
 };
@@ -12,6 +18,16 @@ const rabbitsSlice = createSlice({
   initialState: rabbitsInitialState,
   extraReducers: builder => {
     builder
+      .addCase(fetchRabbitsBreed.fulfilled, (state, action) => {
+        state.breed = action.payload;
+        state.isLoading = false;
+      })
+      .addCase(fetchRabbitsBreed.pending, (state, _) => {
+        state.isLoading = true;
+      })
+      .addCase(fetchRabbitsBreed.rejected, (state, action) => {
+        state.error = true;
+      })
       .addCase(fetchRabbits.fulfilled, (state, action) => {
         state.rabbits = action.payload;
         state.isLoading = false;
