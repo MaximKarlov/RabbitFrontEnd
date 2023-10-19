@@ -14,13 +14,17 @@ import {
 } from '../../redux/rabbits/rabbitsSelector';
 import RBCSS from './RabbitBreed.module.css';
 
-let result;
-
 export const RabbitBreedList = () => {
   const [nameBreed, setNameBreed] = useState('');
   const [colorBreed, setColorBreed] = useState('');
   const [aboutBreed, setAboutBreed] = useState('');
   const [modalIsOpen, setIsOpen] = useState(false);
+
+  const objectsToSend = {
+    name: nameBreed,
+    color: colorBreed,
+    about: aboutBreed,
+  };
 
   const dispatch = useDispatch();
 
@@ -50,14 +54,8 @@ export const RabbitBreedList = () => {
   const breed = useSelector(getRabbitsBreed);
   const isLoading = useSelector(getIsLoading);
 
-  console.log('breed', breed);
-
   useEffect(() => {
     dispatch(fetchRabbitsBreed());
-  }, [dispatch]);
-
-  useEffect(() => {
-    console.log('result', result);
   }, [dispatch]);
 
   const handleChangeName = event => {
@@ -74,14 +72,9 @@ export const RabbitBreedList = () => {
   const onSubmit = e => {
     e.preventDefault();
 
-    const objectsToSend = {
-      name: nameBreed,
-      color: colorBreed,
-      about: aboutBreed,
-    };
-    dispatch(addRabbitBreed(objectsToSend)).then(el =>
-      el.payload === 201 ? setIsOpen(false) : setIsOpen(true)
-    );
+    dispatch(addRabbitBreed(objectsToSend))
+      .then(el => (el.payload === 201 ? setIsOpen(false) : setIsOpen(true)))
+      .then(() => dispatch(fetchRabbitsBreed()));
   };
 
   return (

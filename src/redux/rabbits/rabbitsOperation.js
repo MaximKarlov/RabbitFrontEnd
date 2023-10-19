@@ -20,9 +20,9 @@ export const fetchRabbits = createAsyncThunk(
     const persistToken = state.auth.token;
     token.set(persistToken);
     try {
-      const { data } = await axios.get('/rabbits');
+      const { data, status } = await axios.get('/rabbits');
       // console.log('data>>', data);
-      return data;
+      return { data, status };
     } catch (err) {
       Notiflix.Notify.failure(err.message);
       return err.message;

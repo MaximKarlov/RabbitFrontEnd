@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react';
-import Notiflix from 'notiflix';
+import React from 'react';
+// import Notiflix from 'notiflix';
 // import { getRabbits } from '../../redux/rabbits/rabbitsSelector';
 // import { nanoid } from 'nanoid';
 // import { useDispatch } from 'react-redux';
@@ -42,13 +42,14 @@ export const RabbitsItem = Rabbits => {
       favorite: el.favorite,
     })
   );
-  useEffect(() => {
-    console.log(Rabbits);
-    if (Rabbits.Rabbits.length === 0)
-      Notiflix.Notify.warning(
-        'Ще не додано жодного кролика. Будь ласка додайте кролика!!!'
-      );
-  }, [Rabbits]);
+
+  // useEffect(() => {
+  //   console.log(Rabbits);
+  //   if (Rabbits.Rabbits.length === 0)
+  //     Notiflix.Notify.warning(
+  //       'Ще не додано жодного кролика. Будь ласка додайте кролика!!!'
+  //     );
+  // }, [Rabbits]);
 
   // const rowsRabbit = JSON.stringify(Rabbits.Rabbits);
   // console.log(rowsRabbit);

@@ -28,6 +28,12 @@ export const RabbitList = () => {
   console.log('options', options);
 
   return (
-    <div>{isLoading ? <Loader /> : <RabbitsItem Rabbits={rabbits} />}</div>
+    <div>
+      {isLoading ? (
+        <Loader />
+      ) : rabbits.status === 200 ? (
+        <RabbitsItem Rabbits={rabbits.data} />
+      ) : null}
+    </div>
   );
 };
