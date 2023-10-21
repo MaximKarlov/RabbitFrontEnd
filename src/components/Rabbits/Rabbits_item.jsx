@@ -1,6 +1,10 @@
-import React from 'react';
-import { useDispatch } from 'react-redux';
-import { deleteRabbit } from '../../redux/rabbits/rabbitsOperation';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+  deleteRabbit,
+  findRabbitById,
+  fetchRabbits,
+} from '../../redux/rabbits/rabbitsOperation';
+import { getIsLoading } from '../../redux/rabbits/rabbitsSelector';
 import { Button } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import Table from '@mui/material/Table';
@@ -14,6 +18,7 @@ let counterID = 0;
 
 export const RabbitsItem = Rabbits => {
   const dispatch = useDispatch();
+  const isLoading = useSelector(getIsLoading);
 
   const rowsRabbit = [];
 
@@ -34,9 +39,13 @@ export const RabbitsItem = Rabbits => {
   );
 
   const deleteRabbits = e => {
-    const deleteRabbitID =
-      e.target.parentElement.parentElement.getAttribute('_id');
-    dispatch(deleteRabbit(deleteRabbitID));
+    const rabbitID = e.target.parentElement.parentElement.getAttribute('_id');
+    dispatch(deleteRabbit(rabbitID)).then(() => dispatch(fetchRabbits()));
+  };
+
+  const findRabbits = e => {
+    const rabbitID = e.target.parentElement.parentElement.getAttribute('_id');
+    dispatch(findRabbitById(rabbitID));
   };
   // console.log(rowsRabbit);
 
@@ -73,6 +82,7 @@ export const RabbitsItem = Rabbits => {
               <TableCell align="right">cage</TableCell>
               <TableCell align="right">Photo Rabbit</TableCell>
               <TableCell align="right">favorite</TableCell>
+              <TableCell align="center">Edit</TableCell>
               <TableCell align="center">Delete</TableCell>
             </TableRow>
           </TableHead>
@@ -97,7 +107,17 @@ export const RabbitsItem = Rabbits => {
                 <TableCell align="right">{row.photoRabbit}</TableCell>
                 <TableCell align="right">{row.favorite.toString()}</TableCell>
                 <TableCell align="center">
-                  {/* <> */}
+                  <Button
+                    variant="outlined"
+                    startIcon={<DeleteIcon />}
+                    type="text"
+                    // className={ContactCss.btn}
+                    onClick={findRabbits}
+                  >
+                    Edit
+                  </Button>
+                </TableCell>
+                <TableCell align="center">
                   <Button
                     variant="outlined"
                     startIcon={<DeleteIcon />}
@@ -107,7 +127,6 @@ export const RabbitsItem = Rabbits => {
                   >
                     Delete
                   </Button>
-                  {/* </> */}
                 </TableCell>
               </TableRow>
             ))}

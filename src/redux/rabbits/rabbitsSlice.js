@@ -46,9 +46,6 @@ const rabbitsSlice = createSlice({
         state.isLoading = true;
       })
       .addCase(deleteRabbit.fulfilled, (state, action) => {
-        state.items = state.items.filter(
-          contact => contact.id !== action.payload.id
-        );
         state.isLoading = false;
       })
       .addCase(deleteRabbit.pending, (state, action) => {

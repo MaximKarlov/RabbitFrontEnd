@@ -1,8 +1,10 @@
 import axios from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import Notiflix from 'notiflix';
+//localhost:3000/
 
-axios.defaults.baseURL = 'https://rabbitbackend.onrender.com';
+// axios.defaults.baseURL = 'https://rabbitbackend.onrender.com';
+axios.defaults.baseURL = 'http://localhost:3005';
 
 const token = {
   set(token) {
@@ -70,17 +72,17 @@ export const addRabbitBreed = createAsyncThunk(
 );
 
 export const addContact = createAsyncThunk(
-  'contacts/addContact',
+  'rabbit/addRabbit',
   async (contact, thunkAPI) => {
     const state = thunkAPI.getState();
     const persistToken = state.auth.token;
     token.set(persistToken);
 
     try {
-      const { data, status } = await axios.post('/contacts', contact);
+      const { data, status } = await axios.post('/rabbits', contact);
       if (status === 201)
         Notiflix.Notify.success(
-          `Контакт додано у базу! ${'\n'} The contact was successfully created.`
+          `Кролика додано у базу! ${'\n'} The rabbit was successfully created.`
         );
       return data;
     } catch (err) {
@@ -91,19 +93,32 @@ export const addContact = createAsyncThunk(
 );
 
 export const updateContact = createAsyncThunk(
-  'contacts/updateContact',
+  'rabbit/updateRabbit',
   async (id, { rejectWithValue }, thunkAPI) => {
     const state = thunkAPI.getState();
     const persistToken = state.auth.token;
     token.set(persistToken);
 
     try {
-      const { data, status } = await axios.patch(`/contacts/${id}`);
+      const { data, status } = await axios.patch(`rabbits/${id}`);
       if (status === 200)
         Notiflix.Notify.success(
-          'Контакт редаговано у базі. \n The contact was successfully updated.'
+          'Кролика редаговано у базі. \n The rabbit was successfully updated.'
         );
       return data;
+    } catch (err) {
+      Notiflix.Notify.failure(err.message);
+      return rejectWithValue(err.message);
+    }
+  }
+);
+
+export const findRabbitById = createAsyncThunk(
+  'rabbit/findById',
+  async (id, { rejectWithValue }) => {
+    try {
+      const { data, status } = await axios.get(`/rabbits/${id}`);
+      if (status === 200) return console.log(data);
     } catch (err) {
       Notiflix.Notify.failure(err.message);
       return rejectWithValue(err.message);
@@ -120,7 +135,7 @@ export const deleteRabbit = createAsyncThunk(
         Notiflix.Notify.success(
           `Кролика видалено з бази! \n  The rabbit was successfully deleted.`
         );
-      return data;
+      return status;
     } catch (err) {
       Notiflix.Notify.failure(err.message);
       return rejectWithValue(err.message);
