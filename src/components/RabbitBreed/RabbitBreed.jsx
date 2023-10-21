@@ -7,6 +7,9 @@ import {
   addRabbitBreed,
 } from '../../redux/rabbits/rabbitsOperation';
 import Modal from 'react-modal';
+import Button from '@mui/material/Button';
+import AddOutlinedIcon from '@mui/icons-material/AddOutlined';
+
 import { TextField } from '@mui/material';
 import {
   getRabbitsBreed,
@@ -83,7 +86,15 @@ export const RabbitBreedList = () => {
         {isLoading ? <Loader /> : <RabbitBreedItems BreedList={breed} />}
       </div>
       <div>
-        <button onClick={openModal}>ADD Breed</button>
+        <Button
+          variant="outlined"
+          startIcon={<AddOutlinedIcon />}
+          type="text"
+          // className={ContactCss.btn}
+          onClick={openModal}
+        >
+          ADD BREED
+        </Button>
         <Modal
           isOpen={modalIsOpen}
           onRequestClose={closeModal}

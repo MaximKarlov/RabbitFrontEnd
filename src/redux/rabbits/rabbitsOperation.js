@@ -111,14 +111,14 @@ export const updateContact = createAsyncThunk(
   }
 );
 
-export const deleteContact = createAsyncThunk(
-  'contacts/deleteContact',
+export const deleteRabbit = createAsyncThunk(
+  'rabbit/deleteRabbit',
   async (id, { rejectWithValue }) => {
     try {
-      const { data, status } = await axios.delete(`/contacts/${id}`);
+      const { data, status } = await axios.delete(`/rabbits/${id}`);
       if (status === 200)
         Notiflix.Notify.success(
-          `Контакт видалено з бази! \n  The contact was successfully deleted.`
+          `Кролика видалено з бази! \n  The rabbit was successfully deleted.`
         );
       return data;
     } catch (err) {

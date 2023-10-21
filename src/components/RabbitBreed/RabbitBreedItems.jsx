@@ -1,10 +1,11 @@
-import * as React from 'react';
+import { useState } from 'react';
 import { DataGrid } from '@mui/x-data-grid';
 import RBCSS from './RabbitBreed.module.css';
-
-let counterID = 0;
+import { Button, Stack } from '@mui/material';
+import DeleteIcon from '@mui/icons-material/Delete';
 
 export default function RabbitBreedItems({ BreedList }) {
+  let counterID = 0;
   const columns = [
     { field: 'id', headerName: 'ID', width: 100 },
     { field: 'name', headerName: 'Name', width: 250 },
@@ -23,6 +24,9 @@ export default function RabbitBreedItems({ BreedList }) {
     })
   );
 
+  const [rowSelectionModel, setRowSelectionModel] = useState([]);
+  console.log(rowSelectionModel);
+  console.log(rowsRabbitBreed);
   return (
     <div className={RBCSS.tableBreed}>
       <DataGrid
@@ -35,7 +39,24 @@ export default function RabbitBreedItems({ BreedList }) {
         }}
         pageSizeOptions={[5, 10, 20, 50]}
         checkboxSelection
+        onRowSelectionModelChange={newRowSelectionModel => {
+          setRowSelectionModel(newRowSelectionModel);
+        }}
+        rowSelectionModel={rowSelectionModel}
+        sx={{ cursor: 'pointer', border: 'none' }}
+        scope="row"
       />
+      <Stack direction="row" spacing={2}>
+        <Button
+          variant="outlined"
+          startIcon={<DeleteIcon />}
+          type="text"
+          // className={ContactCss.btn}
+          // onClick={() => dispatch(deleteContact(id))}
+        >
+          Delete
+        </Button>
+      </Stack>
     </div>
   );
 }

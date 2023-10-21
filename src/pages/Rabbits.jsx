@@ -14,6 +14,8 @@ export default function Main() {
         {/* <h2>Contacts</h2> */}
         {/* <Filter /> */}
         <RabbitList />
+      </div>
+      <div>
         <ButtonMenu />
       </div>
     </>

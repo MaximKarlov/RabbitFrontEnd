@@ -1,36 +1,26 @@
 import React from 'react';
-// import Notiflix from 'notiflix';
-// import { getRabbits } from '../../redux/rabbits/rabbitsSelector';
-// import { nanoid } from 'nanoid';
-// import { useDispatch } from 'react-redux';
-// import { deleteContact } from '../../redux/rabbits/rabbitsOperation';
-// import RabbitsCss from '../Rabbits/Rabbits.module.css';
-// import Button from '@mui/material/Button';
-// import DeleteIcon from '@mui/icons-material/Delete';
-import { DataGrid } from '@mui/x-data-grid';
-// import ContactPhoneIcon from '@mui/icons-material/ContactPhone';
-// import Stack from '@mui/material/Stack';
+import { useDispatch } from 'react-redux';
+import { deleteRabbit } from '../../redux/rabbits/rabbitsOperation';
+import { Button } from '@mui/material';
+import DeleteIcon from '@mui/icons-material/Delete';
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import Paper from '@mui/material/Paper';
 let counterID = 0;
 
 export const RabbitsItem = Rabbits => {
-  const columns = [
-    { field: 'id', headerName: 'ID', width: 250 },
-    { field: 'name', headerName: 'Name', width: 130 },
-    { field: 'gender', headerName: 'Gender', width: 130 },
-    { field: 'breed', headerName: 'Breed', width: 130 },
-    { field: 'photoRabbit', headerName: 'Photo', width: 130 },
-    { field: 'dateBirthDay', headerName: 'BirthDay', width: 130 },
-    { field: 'cage', headerName: 'Cage', width: 130 },
-    { field: 'Mother', headerName: 'Mother', width: 130 },
-    { field: 'Father', headerName: 'Father', width: 130 },
-    { field: 'favorite', headerName: 'Favorite', width: 130 },
-  ];
+  const dispatch = useDispatch();
 
   const rowsRabbit = [];
 
   Rabbits.Rabbits.map(el =>
     rowsRabbit.push({
       id: (counterID += 1),
+      _id: el._id,
       gender: el.gender,
       name: el.name,
       breed: el.breed,
@@ -43,29 +33,87 @@ export const RabbitsItem = Rabbits => {
     })
   );
 
-  // useEffect(() => {
-  //   console.log(Rabbits);
-  //   if (Rabbits.Rabbits.length === 0)
-  //     Notiflix.Notify.warning(
-  //       'Ще не додано жодного кролика. Будь ласка додайте кролика!!!'
-  //     );
-  // }, [Rabbits]);
-
-  // const rowsRabbit = JSON.stringify(Rabbits.Rabbits);
+  const deleteRabbits = e => {
+    const deleteRabbitID =
+      e.target.parentElement.parentElement.getAttribute('_id');
+    dispatch(deleteRabbit(deleteRabbitID));
+  };
   // console.log(rowsRabbit);
+
   return (
     <div style={{ height: 400, width: '100%' }}>
-      <DataGrid
+      {/* <DataGrid
         rows={rowsRabbit}
         columns={columns}
         initialState={{
           pagination: {
-            paginationModel: { page: 0, pageSize: 5 },
+            paginationModel: { page: 0, pageSize: 20 },
           },
         }}
-        pageSizeOptions={[5, 10]}
+        pageSizeOptions={[5, 10, 20, 50]}
         checkboxSelection
-      />
+        onRowSelectionModelChange={newRowSelectionModel => {
+          setRowSelectionModel(newRowSelectionModel);
+        }}
+        rowSelectionModel={rowSelectionModel}
+        sx={{ cursor: 'pointer', border: 'none' }}
+        scope="row"
+      /> */}
+      <TableContainer component={Paper}>
+        <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
+          <TableHead>
+            <TableRow>
+              <TableCell align="center">ID</TableCell>
+              <TableCell align="right">Name</TableCell>
+              <TableCell align="right">Gender</TableCell>
+              <TableCell align="right">Breed</TableCell>
+              <TableCell align="center">Date BirthDay</TableCell>
+              <TableCell align="right">Mother</TableCell>
+              <TableCell align="right">Father</TableCell>
+              <TableCell align="right">cage</TableCell>
+              <TableCell align="right">Photo Rabbit</TableCell>
+              <TableCell align="right">favorite</TableCell>
+              <TableCell align="center">Delete</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {rowsRabbit.map(row => (
+              <TableRow
+                _id={row._id}
+                key={row._id}
+                sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+              >
+                <TableCell component="th" scope="row" align="center">
+                  {row.id}
+                </TableCell>
+                {/* <TableCell align="center">{row.id}</TableCell> */}
+                <TableCell align="right">{row.name}</TableCell>
+                <TableCell align="right">{row.gender}</TableCell>
+                <TableCell align="right">{row.breed}</TableCell>
+                <TableCell align="right">{row.dateBirthDay}</TableCell>
+                <TableCell align="right">{row.Mother}</TableCell>
+                <TableCell align="right">{row.Father}</TableCell>
+                <TableCell align="right">{row.cage}</TableCell>
+                <TableCell align="right">{row.photoRabbit}</TableCell>
+                <TableCell align="right">{row.favorite.toString()}</TableCell>
+                <TableCell align="center">
+                  {/* <> */}
+                  <Button
+                    variant="outlined"
+                    startIcon={<DeleteIcon />}
+                    type="text"
+                    // className={ContactCss.btn}
+                    onClick={deleteRabbits}
+                  >
+                    Delete
+                  </Button>
+                  {/* </> */}
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
     </div>
   );
 };

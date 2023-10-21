@@ -3,7 +3,7 @@ import {
   fetchRabbits,
   fetchRabbitsBreed,
   addContact,
-  deleteContact,
+  deleteRabbit,
 } from './rabbitsOperation';
 
 const rabbitsInitialState = {
@@ -45,13 +45,13 @@ const rabbitsSlice = createSlice({
       .addCase(addContact.pending, (state, action) => {
         state.isLoading = true;
       })
-      .addCase(deleteContact.fulfilled, (state, action) => {
+      .addCase(deleteRabbit.fulfilled, (state, action) => {
         state.items = state.items.filter(
           contact => contact.id !== action.payload.id
         );
         state.isLoading = false;
       })
-      .addCase(deleteContact.pending, (state, action) => {
+      .addCase(deleteRabbit.pending, (state, action) => {
         state.isLoading = true;
       });
 
