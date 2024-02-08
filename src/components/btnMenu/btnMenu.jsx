@@ -29,7 +29,7 @@ export const ButtonMenu = () => {
           // className={ContactCss.btn}
           // onClick={() => dispatch(deleteContact(id))}
         >
-          ADD RBreed
+          ADD Breed
         </Button>
       </NavLink>
       {/* <NavLink to="/rabbits/add" className={CSS.linked}>

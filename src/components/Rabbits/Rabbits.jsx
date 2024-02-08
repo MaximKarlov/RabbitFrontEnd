@@ -3,10 +3,13 @@ import { RabbitsItem } from './Rabbits_item';
 import { Loader } from '../Loader/Loader';
 import { useEffect } from 'react';
 
-import { fetchRabbits } from '../../redux/rabbits/rabbitsOperation';
-// import RabbitsCss from './Rabbits.module.css';
+import {
+  fetchRabbits,
+  fetchRabbitsBreed,
+} from '../../redux/rabbits/rabbitsOperation';
 import {
   getRabbits,
+  // getRabbitsBreed,
   // getError,
   getIsLoading,
 } from '../../redux/rabbits/rabbitsSelector';
@@ -22,10 +25,11 @@ export const RabbitList = () => {
 
   useEffect(() => {
     dispatch(fetchRabbits());
+    dispatch(fetchRabbitsBreed());
   }, [dispatch]);
 
-  const options = rabbits;
-  console.log('options', options);
+  // const options = rabbits;
+  // console.log('options', options);
 
   return (
     <div>

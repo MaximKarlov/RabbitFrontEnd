@@ -44,8 +44,6 @@ const Login = () => {
   const loggInUser = e => {
     e.preventDefault();
     dispatch(logInUser({ email, password }));
-    setEmail('');
-    setPassword('');
   };
 
   return (
@@ -62,7 +60,9 @@ const Login = () => {
               className={CSS.item_input}
             />
             <FormControl variant="outlined" className={CSS.item_input}>
-              <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
+              <InputLabel htmlFor="outlined-adornment-password">
+                Password
+              </InputLabel>
               <OutlinedInput
                 id="outlined-adornment-password"
                 name="password"
@@ -84,7 +84,12 @@ const Login = () => {
               />
             </FormControl>
           </div>
-          <Button variant="outlined" startIcon={<LoginIcon />} className={CSS.home_btn} type="submit">
+          <Button
+            variant="outlined"
+            startIcon={<LoginIcon />}
+            className={CSS.home_btn}
+            type="submit"
+          >
             Вхід
           </Button>
         </div>

@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux';
 import { PrivateRoute } from './PrivateRoute';
 import { RestrictedRoute } from './RestrictedRoute';
 import { fetchCurrentUser } from '../redux/auth/authOperation';
+import { fetchCurrentRabbits } from '../redux/rabbits/rabbitsOperation';
 import { Layout } from './Layout';
 
 const Home = lazy(() => import('../pages/Home'));
@@ -18,6 +19,7 @@ export const App = () => {
 
   useEffect(() => {
     dispatch(fetchCurrentUser());
+    dispatch(fetchCurrentRabbits());
   }, [dispatch]);
 
   return (

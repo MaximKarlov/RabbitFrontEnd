@@ -4,6 +4,8 @@ import {
   fetchRabbitsBreed,
   addContact,
   deleteRabbit,
+  fetchCurrentRabbits,
+  deleteRabbitBreed,
 } from './rabbitsOperation';
 
 const rabbitsInitialState = {
@@ -18,6 +20,14 @@ const rabbitsSlice = createSlice({
   initialState: rabbitsInitialState,
   extraReducers: builder => {
     builder
+      .addCase(fetchCurrentRabbits.pending, (state, action) => {
+        state.isLoading = true;
+      })
+      .addCase(fetchCurrentRabbits.fulfilled, (state, action) => {
+        state.rabbits = action.payload[0];
+        state.breed = action.payload[1];
+        state.isLoading = false;
+      })
       .addCase(fetchRabbitsBreed.fulfilled, (state, action) => {
         state.breed = action.payload;
         state.isLoading = false;
@@ -49,6 +59,12 @@ const rabbitsSlice = createSlice({
         state.isLoading = false;
       })
       .addCase(deleteRabbit.pending, (state, action) => {
+        state.isLoading = true;
+      })
+      .addCase(deleteRabbitBreed.fulfilled, (state, action) => {
+        state.isLoading = false;
+      })
+      .addCase(deleteRabbitBreed.pending, (state, action) => {
         state.isLoading = true;
       });
 

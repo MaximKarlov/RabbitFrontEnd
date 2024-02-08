@@ -6,9 +6,9 @@ const Home = () => {
   const location = useLocation();
   return (
     <div className={CSS.bodyItem}>
-      <h2>Творіння Макса Карлова)))</h2>
+      <h2>Застосунок для роботи з кроликами</h2>
       <p>
-        Для роботи з контактами потрібно
+        Для роботи потрібно
         <Link to="/register" state={{ from: location }} className={CSS.linked}>
           <span> зареєструватися </span>
         </Link>

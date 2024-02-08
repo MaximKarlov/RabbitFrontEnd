@@ -1,62 +1,111 @@
-import { useState } from 'react';
-import { DataGrid } from '@mui/x-data-grid';
-import RBCSS from './RabbitBreed.module.css';
-import { Button, Stack } from '@mui/material';
+// import { useState, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import * as MUI from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
+import {
+  deleteRabbitBreed,
+  fetchRabbitsBreed,
+} from '../../redux/rabbits/rabbitsOperation';
 
 export default function RabbitBreedItems({ BreedList }) {
+  // const [rowSelectionModel, setRowSelectionModel] = useState([]);
+  // const [elementToDeleteKey, setElementToDeleteKey] = useState([]);
+  const dispatch = useDispatch();
   let counterID = 0;
-  const columns = [
-    { field: 'id', headerName: 'ID', width: 100 },
-    { field: 'name', headerName: 'Name', width: 250 },
-    { field: 'color', headerName: 'Color', width: 130 },
-    { field: 'about', headerName: 'About', width: 400 },
-  ];
+  // const rowsRabbitBreed = [];
+  // let elementToDeleteKey = [];
 
-  const rowsRabbitBreed = [];
+  // BreedList.map(el =>
+  //   rowsRabbitBreed.push({
+  //     id: (counterID += 1),
+  //     name: el.name,
+  //     color: el.color,
+  //     about: el.about,
+  //     key: el._id,
+  //   })
+  // );
 
-  BreedList.map(el =>
-    rowsRabbitBreed.push({
-      id: (counterID += 1),
-      name: el.name,
-      color: el.color,
-      about: el.about,
-    })
-  );
+  // const makeListToDelete = element => {
+  //   const listToDelete = [];
+  //   setRowSelectionModel(element);
+  //   rowSelectionModel.map(
+  //     id =>
+  //       rowsRabbitBreed.map(el => {
+  //         if (el.id === id) {
+  //           listToDelete.push(el.key);
+  //         }
+  //         return listToDelete;
+  //       }),
+  //     setElementToDeleteKey(listToDelete)
+  //   );
+  // };
 
-  const [rowSelectionModel, setRowSelectionModel] = useState([]);
-  console.log(rowSelectionModel);
-  console.log(rowsRabbitBreed);
+  // console.log('deleting2 elementToDeleteKey', elementToDeleteKey);
+
+  const deleteBreed = e => {
+    const breedID = e.target.getAttribute('id');
+    dispatch(deleteRabbitBreed(breedID)).then(() =>
+      dispatch(fetchRabbitsBreed())
+    );
+  };
+
   return (
-    <div className={RBCSS.tableBreed}>
-      <DataGrid
-        rows={rowsRabbitBreed}
-        columns={columns}
-        initialState={{
-          pagination: {
-            paginationModel: { page: 0, pageSize: 20 },
-          },
-        }}
-        pageSizeOptions={[5, 10, 20, 50]}
-        checkboxSelection
-        onRowSelectionModelChange={newRowSelectionModel => {
-          setRowSelectionModel(newRowSelectionModel);
-        }}
-        rowSelectionModel={rowSelectionModel}
-        sx={{ cursor: 'pointer', border: 'none' }}
-        scope="row"
-      />
-      <Stack direction="row" spacing={2}>
-        <Button
-          variant="outlined"
-          startIcon={<DeleteIcon />}
-          type="text"
-          // className={ContactCss.btn}
-          // onClick={() => dispatch(deleteContact(id))}
+    <div style={{ height: 400, width: '100%' }}>
+      <MUI.TableContainer component={MUI.Paper}>
+        <MUI.Table
+          sx={{ minWidth: 650 }}
+          size="small"
+          aria-label="a dense table"
         >
-          Delete
-        </Button>
-      </Stack>
+          <MUI.TableHead>
+            <MUI.TableRow>
+              <MUI.TableCell align="center">ID</MUI.TableCell>
+              <MUI.TableCell align="center">Name</MUI.TableCell>
+              <MUI.TableCell align="center">Color</MUI.TableCell>
+              <MUI.TableCell align="center">About</MUI.TableCell>
+            </MUI.TableRow>
+          </MUI.TableHead>
+          <MUI.TableBody>
+            {BreedList.map(row => (
+              <MUI.TableRow
+                key={row._id}
+                sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+              >
+                <MUI.TableCell component="th" scope="row" align="center">
+                  {(counterID += 1)}
+                </MUI.TableCell>
+                {/* <TableCell align="center">{row.id}</TableCell> */}
+                <MUI.TableCell align="right">{row.name}</MUI.TableCell>
+                <MUI.TableCell align="right">{row.color}</MUI.TableCell>
+                <MUI.TableCell align="center">{row.about}</MUI.TableCell>
+                <MUI.TableCell align="center">
+                  <MUI.Button
+                    variant="outlined"
+                    startIcon={<DeleteIcon />}
+                    type="text"
+                    // className={ContactCss.btn}
+                    // onClick={findBreed}
+                  >
+                    Edit
+                  </MUI.Button>
+                </MUI.TableCell>
+                <MUI.TableCell align="center">
+                  <MUI.Button
+                    id={row._id}
+                    variant="outlined"
+                    startIcon={<DeleteIcon />}
+                    type="text"
+                    // className={ContactCss.btn}
+                    onClick={deleteBreed}
+                  >
+                    Delete
+                  </MUI.Button>
+                </MUI.TableCell>
+              </MUI.TableRow>
+            ))}
+          </MUI.TableBody>
+        </MUI.Table>
+      </MUI.TableContainer>
     </div>
   );
 }

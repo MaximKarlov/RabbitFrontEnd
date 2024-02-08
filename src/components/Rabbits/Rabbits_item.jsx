@@ -1,10 +1,10 @@
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import {
   deleteRabbit,
   findRabbitById,
   fetchRabbits,
 } from '../../redux/rabbits/rabbitsOperation';
-import { getIsLoading } from '../../redux/rabbits/rabbitsSelector';
+// import { getIsLoading } from '../../redux/rabbits/rabbitsSelector';
 import { Button } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import Table from '@mui/material/Table';
@@ -18,7 +18,7 @@ let counterID = 0;
 
 export const RabbitsItem = Rabbits => {
   const dispatch = useDispatch();
-  const isLoading = useSelector(getIsLoading);
+  // const isLoading = useSelector(getIsLoading);
 
   const rowsRabbit = [];
 
@@ -51,23 +51,6 @@ export const RabbitsItem = Rabbits => {
 
   return (
     <div style={{ height: 400, width: '100%' }}>
-      {/* <DataGrid
-        rows={rowsRabbit}
-        columns={columns}
-        initialState={{
-          pagination: {
-            paginationModel: { page: 0, pageSize: 20 },
-          },
-        }}
-        pageSizeOptions={[5, 10, 20, 50]}
-        checkboxSelection
-        onRowSelectionModelChange={newRowSelectionModel => {
-          setRowSelectionModel(newRowSelectionModel);
-        }}
-        rowSelectionModel={rowSelectionModel}
-        sx={{ cursor: 'pointer', border: 'none' }}
-        scope="row"
-      /> */}
       <TableContainer component={Paper}>
         <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
           <TableHead>

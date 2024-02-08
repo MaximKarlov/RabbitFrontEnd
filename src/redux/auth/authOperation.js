@@ -1,7 +1,10 @@
 import axios from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import Notiflix from 'notiflix';
-axios.defaults.baseURL = 'https://rabbitbackend.onrender.com';
+axios.defaults.baseURL = 'http://localhost:3005/';
+// axios.defaults.baseURL = 'https://maximkarlov.github.io/RabbitBackEnd';
+// axios.defaults.baseURL = 'https://rabbitbackend.onrender.com';
+// https://maximkarlov.github.io/RabbitBackEnd/
 
 const token = {
   set(token) {
@@ -19,7 +22,7 @@ export const fetchCurrentUser = createAsyncThunk(
     const persistToken = state.auth.token;
 
     if (persistToken === null) {
-      console.log('Токена не існує');
+      // console.log('Токена не існує');
       return thunkAPI.rejectWithValue();
     }
 
@@ -58,8 +61,14 @@ export const logInUser = createAsyncThunk(
       token.set(data.token);
       return data;
     } catch (err) {
-      Notiflix.Notify.failure('Щось пішло не так!!! Помилка: ' + err.message);
-      return rejectWithValue(err.message);
+      if (err.response.status === 401) {
+        Notiflix.Notify.failure('невірний логін або пароль');
+      } else
+        Notiflix.Notify.failure(
+          'Щось пішло не так!!! Помилка: ' + err.response.status
+        );
+      return rejectWithValue(err.response.status);
+      // return err;
     }
   }
 );
