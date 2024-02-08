@@ -12,7 +12,7 @@ function sleep(duration) {
   });
 }
 
-export const AddRabbit_breed = () => {
+export const AddRabbitBreed = () => {
   const [open, setOpen] = useState(false);
   const [options, setOptions] = useState([]);
   const loading = open && options.length === 0;
