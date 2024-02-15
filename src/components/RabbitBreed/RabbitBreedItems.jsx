@@ -1,46 +1,19 @@
-// import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import * as MUI from '@mui/material';
-import DeleteIcon from '@mui/icons-material/Delete';
+import * as MuiIcon from '@mui/icons-material/';
 import {
   deleteRabbitBreed,
   fetchRabbitsBreed,
+  updateRabbitsBreed,
 } from '../../redux/rabbits/rabbitsOperation';
+import { RabbitBreedModal } from './RabbitBreedModal';
 
 export default function RabbitBreedItems({ BreedList }) {
-  // const [rowSelectionModel, setRowSelectionModel] = useState([]);
-  // const [elementToDeleteKey, setElementToDeleteKey] = useState([]);
+  const [editBreed, setEditBreed] = useState(false);
+  const [breedId, setBreedId] = useState('');
   const dispatch = useDispatch();
   let counterID = 0;
-  // const rowsRabbitBreed = [];
-  // let elementToDeleteKey = [];
-
-  // BreedList.map(el =>
-  //   rowsRabbitBreed.push({
-  //     id: (counterID += 1),
-  //     name: el.name,
-  //     color: el.color,
-  //     about: el.about,
-  //     key: el._id,
-  //   })
-  // );
-
-  // const makeListToDelete = element => {
-  //   const listToDelete = [];
-  //   setRowSelectionModel(element);
-  //   rowSelectionModel.map(
-  //     id =>
-  //       rowsRabbitBreed.map(el => {
-  //         if (el.id === id) {
-  //           listToDelete.push(el.key);
-  //         }
-  //         return listToDelete;
-  //       }),
-  //     setElementToDeleteKey(listToDelete)
-  //   );
-  // };
-
-  // console.log('deleting2 elementToDeleteKey', elementToDeleteKey);
 
   const deleteBreed = e => {
     const breedID = e.target.getAttribute('id');
@@ -48,6 +21,25 @@ export default function RabbitBreedItems({ BreedList }) {
       dispatch(fetchRabbitsBreed())
     );
   };
+
+  const openClick = e => {
+    // console.dir('openClick', e);
+    const breedID = e.target.getAttribute('id');
+    setEditBreed(true);
+    setBreedId(breedID);
+  };
+
+  const closeClick = () => {
+    setEditBreed(false);
+  };
+
+  // const editBreed = e => {
+  // const breedID = e.target.getAttribute('id');
+  // dispatch(updateRabbitsBreed(breedID)).then(() =>
+  //   dispatch(fetchRabbitsBreed())
+  // );
+  // setEditBreed1(true);
+  // };
 
   return (
     <div style={{ height: 400, width: '100%' }}>
@@ -74,17 +66,16 @@ export default function RabbitBreedItems({ BreedList }) {
                 <MUI.TableCell component="th" scope="row" align="center">
                   {(counterID += 1)}
                 </MUI.TableCell>
-                {/* <TableCell align="center">{row.id}</TableCell> */}
                 <MUI.TableCell align="right">{row.name}</MUI.TableCell>
                 <MUI.TableCell align="right">{row.color}</MUI.TableCell>
                 <MUI.TableCell align="center">{row.about}</MUI.TableCell>
                 <MUI.TableCell align="center">
                   <MUI.Button
+                    id={row._id}
                     variant="outlined"
-                    startIcon={<DeleteIcon />}
+                    startIcon={<MuiIcon.Edit />}
                     type="text"
-                    // className={ContactCss.btn}
-                    // onClick={findBreed}
+                    onClick={openClick}
                   >
                     Edit
                   </MUI.Button>
@@ -93,9 +84,8 @@ export default function RabbitBreedItems({ BreedList }) {
                   <MUI.Button
                     id={row._id}
                     variant="outlined"
-                    startIcon={<DeleteIcon />}
+                    startIcon={<MuiIcon.Delete />}
                     type="text"
-                    // className={ContactCss.btn}
                     onClick={deleteBreed}
                   >
                     Delete
@@ -106,6 +96,16 @@ export default function RabbitBreedItems({ BreedList }) {
           </MUI.TableBody>
         </MUI.Table>
       </MUI.TableContainer>
+      {editBreed ? (
+        <RabbitBreedModal
+          open={editBreed}
+          close={closeClick}
+          edit={true}
+          id={breedId}
+        />
+      ) : (
+        ''
+      )}
     </div>
   );
 }

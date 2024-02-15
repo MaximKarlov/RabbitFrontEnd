@@ -4,7 +4,6 @@ import {
   findRabbitById,
   fetchRabbits,
 } from '../../redux/rabbits/rabbitsOperation';
-// import { getIsLoading } from '../../redux/rabbits/rabbitsSelector';
 import { Button } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import Table from '@mui/material/Table';

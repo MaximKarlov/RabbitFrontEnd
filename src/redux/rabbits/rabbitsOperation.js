@@ -74,27 +74,6 @@ export const fetchRabbitsBreed = createAsyncThunk(
   }
 );
 
-export const addRabbitBreed = createAsyncThunk(
-  'rabbit/addRabbitBreed',
-  async (breed, thunkAPI) => {
-    const state = thunkAPI.getState();
-    const persistToken = state.auth.token;
-    token.set(persistToken);
-
-    try {
-      const { status } = await axios.post('rabbits/breeds/add', breed);
-      if (status === 201)
-        Notiflix.Notify.success(
-          `Породу додано у базу! ${'\n'} The Breed was successfully created.`
-        );
-      return status;
-    } catch (err) {
-      Notiflix.Notify.failure(err.message);
-      return err.message;
-    }
-  }
-);
-
 export const addContact = createAsyncThunk(
   'rabbit/addRabbit',
   async (contact, thunkAPI) => {
@@ -166,6 +145,68 @@ export const deleteRabbit = createAsyncThunk(
     }
   }
 );
+
+////////////////BREED SET////////////////////
+export const addRabbitBreed = createAsyncThunk(
+  'rabbit/addRabbitBreed',
+  async (breed, thunkAPI) => {
+    const state = thunkAPI.getState();
+    const persistToken = state.auth.token;
+    token.set(persistToken);
+
+    try {
+      const { status } = await axios.post('rabbits/breeds/add', breed);
+      if (status === 201)
+        Notiflix.Notify.success(
+          `Породу додано у базу! ${'\n'} The Breed was successfully created.`
+        );
+      return status;
+    } catch (err) {
+      Notiflix.Notify.failure(err.message);
+      return err.message;
+    }
+  }
+);
+
+export const findCurrentBreedById = createAsyncThunk(
+  'rabbit/findCurrentBreedById',
+  async (id, { rejectWithValue }) => {
+    try {
+      const { data, status } = await axios.get(`/rabbits/breeds/${id}`);
+      if (status === 200) return data;
+    } catch (err) {
+      Notiflix.Notify.failure(err.message);
+      return rejectWithValue(err.message);
+    }
+  }
+);
+
+export const updateRabbitsBreed = createAsyncThunk(
+  'rabbit/updateBreed',
+  async (objectsToSend, thunkAPI) => {
+    console.log('object', objectsToSend[1]);
+    console.log('id', objectsToSend[0]);
+    const state = thunkAPI.getState();
+    const persistToken = state.auth.token;
+    token.set(persistToken);
+
+    try {
+      const { data, status } = await axios.put(
+        `/rabbits/breeds/${objectsToSend[0]}`,
+        objectsToSend[1]
+      );
+      if (status === 200)
+        Notiflix.Notify.success(
+          'Породу редаговано у базі. \n The rabbit breed was successfully updated.'
+        );
+      return data;
+    } catch (err) {
+      Notiflix.Notify.failure(err.message);
+      // return rejectWithValue(err.message);
+    }
+  }
+);
+
 export const deleteRabbitBreed = createAsyncThunk(
   'rabbit/deleteRabbitBreed',
   async (id, { rejectWithValue }) => {
