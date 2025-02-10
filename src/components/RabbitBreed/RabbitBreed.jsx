@@ -8,7 +8,7 @@ import {
   getRabbitsBreed,
   getIsLoading,
 } from '../../redux/rabbits/rabbitsSelector';
-import { RabbitBreedModal } from './RabbitBreedModal';
+import { RabbitBreedModal } from '../RabbitBreedModal/RabbitBreedModal';
 
 export const RabbitBreedList = () => {
   const [addBreed, setAddBreed] = useState(false);

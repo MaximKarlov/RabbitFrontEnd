@@ -1,13 +1,13 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import * as MUI from '@mui/material';
 import * as MuiIcon from '@mui/icons-material/';
 import {
   deleteRabbitBreed,
   fetchRabbitsBreed,
-  updateRabbitsBreed,
+  // updateRabbitsBreed,
 } from '../../redux/rabbits/rabbitsOperation';
-import { RabbitBreedModal } from './RabbitBreedModal';
+import { RabbitBreedModal } from '../RabbitBreedModal/RabbitBreedModal';
 
 export default function RabbitBreedItems({ BreedList }) {
   const [editBreed, setEditBreed] = useState(false);
@@ -32,14 +32,6 @@ export default function RabbitBreedItems({ BreedList }) {
   const closeClick = () => {
     setEditBreed(false);
   };
-
-  // const editBreed = e => {
-  // const breedID = e.target.getAttribute('id');
-  // dispatch(updateRabbitsBreed(breedID)).then(() =>
-  //   dispatch(fetchRabbitsBreed())
-  // );
-  // setEditBreed1(true);
-  // };
 
   return (
     <div style={{ height: 400, width: '100%' }}>

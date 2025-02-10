@@ -13,17 +13,16 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-let counterID = 0;
 
-export const RabbitsItem = Rabbits => {
+export const RabbitsItem = ({ Rabbits }) => {
   const dispatch = useDispatch();
   // const isLoading = useSelector(getIsLoading);
 
   const rowsRabbit = [];
 
-  Rabbits.Rabbits.map(el =>
+  Rabbits.map(el =>
     rowsRabbit.push({
-      id: (counterID += 1),
+      id: Rabbits.indexOf(el) + 1,
       _id: el._id,
       gender: el.gender,
       name: el.name,
@@ -31,8 +30,8 @@ export const RabbitsItem = Rabbits => {
       photoRabbit: el.photoRabbit,
       dateBirthDay: el.dateBirthDay,
       cage: el.cage,
-      Mother: el.Mother,
-      Father: el.Father,
+      mother: el.mother,
+      father: el.father,
       favorite: el.favorite,
     })
   );
@@ -46,7 +45,6 @@ export const RabbitsItem = Rabbits => {
     const rabbitID = e.target.parentElement.parentElement.getAttribute('_id');
     dispatch(findRabbitById(rabbitID));
   };
-  // console.log(rowsRabbit);
 
   return (
     <div style={{ height: 400, width: '100%' }}>
@@ -83,8 +81,8 @@ export const RabbitsItem = Rabbits => {
                 <TableCell align="right">{row.gender}</TableCell>
                 <TableCell align="right">{row.breed}</TableCell>
                 <TableCell align="right">{row.dateBirthDay}</TableCell>
-                <TableCell align="right">{row.Mother}</TableCell>
-                <TableCell align="right">{row.Father}</TableCell>
+                <TableCell align="right">{row.mother}</TableCell>
+                <TableCell align="right">{row.father}</TableCell>
                 <TableCell align="right">{row.cage}</TableCell>
                 <TableCell align="right">{row.photoRabbit}</TableCell>
                 <TableCell align="right">{row.favorite.toString()}</TableCell>

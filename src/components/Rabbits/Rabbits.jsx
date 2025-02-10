@@ -1,5 +1,6 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { RabbitsItem } from './Rabbits_item';
+// import { AddRabbitModal } from '../AddRabbitModal/AddRabbitModal';
 import { Loader } from '../Loader/Loader';
 import { useEffect } from 'react';
 
@@ -19,7 +20,6 @@ export const RabbitList = () => {
 
   // Отримуємо частини стану
   const { rabbits } = useSelector(getRabbits);
-  // const breed = useSelector(getRabbitsBreed);
   const isLoading = useSelector(getIsLoading);
   // const error = useSelector(getError);
 
@@ -28,15 +28,12 @@ export const RabbitList = () => {
     dispatch(fetchRabbitsBreed());
   }, [dispatch]);
 
-  // const options = rabbits;
-  // console.log('options', options);
-
   return (
     <div>
       {isLoading ? (
         <Loader />
-      ) : rabbits.status === 200 ? (
-        <RabbitsItem Rabbits={rabbits.data} />
+      ) : rabbits ? (
+        <RabbitsItem Rabbits={rabbits} />
       ) : null}
     </div>
   );

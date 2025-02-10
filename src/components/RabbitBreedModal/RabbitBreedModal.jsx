@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import { styled } from '@mui/system';
 import { Modal as BaseModal } from '@mui/base/Modal';
-import RBCSS from './RabbitBreed.module.css';
+import RBCSS from './RabbitBreedModal.module.css';
 import * as MUI from '@mui/material';
 import {
   addRabbitBreed,
@@ -84,7 +84,6 @@ export function RabbitBreedModal({ open, close, edit, id }) {
 
   const handleUpdate = e => {
     e.preventDefault();
-    console.log('edit', edit);
     if (edit === true) {
       dispatch(updateRabbitsBreed([id, objectsToSend]))
         .then(el => (el.payload === 201 ? close() : ''))
@@ -93,10 +92,10 @@ export function RabbitBreedModal({ open, close, edit, id }) {
     if (edit === false) {
       if (objectsToSend.about === '') {
         objectsToSend.about = '-';
-        dispatch(addRabbitBreed(objectsToSend))
-          .then(el => (el.payload === 201 ? close() : ''))
-          .then(() => dispatch(fetchRabbitsBreed()));
       }
+      dispatch(addRabbitBreed(objectsToSend))
+        .then(el => (el.payload === 201 ? close() : ''))
+        .then(() => dispatch(fetchRabbitsBreed()));
     }
   };
 
@@ -118,7 +117,6 @@ export function RabbitBreedModal({ open, close, edit, id }) {
 
   return (
     <div>
-      {/* {edit ? getBreedById() : ''} */}
       <Modal
         aria-labelledby="unstyled-modal-title"
         aria-describedby="unstyled-modal-description"
@@ -128,10 +126,7 @@ export function RabbitBreedModal({ open, close, edit, id }) {
       >
         <div className={RBCSS.modal}>
           <h2 className={RBCSS.modalTitle}>Add Breed Rabbit</h2>
-          <form
-            className={RBCSS.modalInputs}
-            // onSubmit={onSubmit}
-          >
+          <form className={RBCSS.modalInputs}>
             <MUI.TextField
               id="nameBreed"
               label="Name Breed"

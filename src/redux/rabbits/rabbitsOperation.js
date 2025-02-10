@@ -15,6 +15,44 @@ const token = {
   },
 };
 
+/////////////////////RABBITS///////////////////////
+export const addRabbit = createAsyncThunk(
+  'rabbit/addRabbit',
+  async (rabbit, thunkAPI) => {
+    const state = thunkAPI.getState();
+    const persistToken = state.auth.token;
+    token.set(persistToken);
+
+    try {
+      const { status } = await axios.post('/rabbits/add', rabbit);
+      if (status === 201)
+        Notiflix.Notify.success(
+          `Кролика додано у базу! ${'\n'} The rabbit was successfully created.`
+        );
+      return status;
+    } catch (err) {
+      Notiflix.Notify.failure(err.message);
+      return err.message;
+    }
+  }
+);
+
+export const fetchRabbits = createAsyncThunk(
+  'rabbits/fetchAll',
+  async (_, thunkAPI) => {
+    const state = thunkAPI.getState();
+    const persistToken = state.auth.token;
+    token.set(persistToken);
+    try {
+      const { data, status } = await axios.get('/rabbits');
+      if (status === 200 && data.length > 0) return data;
+    } catch (err) {
+      Notiflix.Notify.failure(err.message);
+      return err.message;
+    }
+  }
+);
+
 export const fetchCurrentRabbits = createAsyncThunk(
   'rabbits/refresh',
   async (_, thunkAPI) => {
@@ -39,23 +77,6 @@ export const fetchCurrentRabbits = createAsyncThunk(
   }
 );
 
-export const fetchRabbits = createAsyncThunk(
-  'rabbits/fetchAll',
-  async (_, thunkAPI) => {
-    const state = thunkAPI.getState();
-    const persistToken = state.auth.token;
-    token.set(persistToken);
-    try {
-      const { data, status } = await axios.get('/rabbits');
-      // console.log('data>>', data);
-      return { data, status };
-    } catch (err) {
-      Notiflix.Notify.failure(err.message);
-      return err.message;
-    }
-  }
-);
-
 export const fetchRabbitsBreed = createAsyncThunk(
   'rabbits/fetchBreedAll',
   async (_, thunkAPI) => {
@@ -70,27 +91,6 @@ export const fetchRabbitsBreed = createAsyncThunk(
         Notiflix.Notify.failure(err.message);
         return err.message;
       }
-    }
-  }
-);
-
-export const addContact = createAsyncThunk(
-  'rabbit/addRabbit',
-  async (contact, thunkAPI) => {
-    const state = thunkAPI.getState();
-    const persistToken = state.auth.token;
-    token.set(persistToken);
-
-    try {
-      const { data, status } = await axios.post('/rabbits', contact);
-      if (status === 201)
-        Notiflix.Notify.success(
-          `Кролика додано у базу! ${'\n'} The rabbit was successfully created.`
-        );
-      return data;
-    } catch (err) {
-      Notiflix.Notify.failure(err.message);
-      return err.message;
     }
   }
 );

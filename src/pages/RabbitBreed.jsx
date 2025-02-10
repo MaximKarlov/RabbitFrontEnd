@@ -4,13 +4,10 @@ import { RabbitBreedList } from '../components/RabbitBreed/RabbitBreed';
 
 const RabbitBreed = () => {
   return (
-    //Щось гітхаб не прийняв зміни при перейменуванні файлу
-    <>
-      <div className={AppCss.component}>
-        <h1>Rabbits breeds</h1>
-        <RabbitBreedList />
-      </div>
-    </>
+    <div className={AppCss.component}>
+      <h1>Rabbits breeds</h1>
+      <RabbitBreedList />
+    </div>
   );
 };
 

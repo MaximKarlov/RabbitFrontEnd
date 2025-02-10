@@ -1,4 +1,4 @@
-import { configureStore, combineReducers } from '@reduxjs/toolkit';
+import { configureStore } from '@reduxjs/toolkit';
 import {
   persistStore,
   persistReducer,
@@ -20,17 +20,13 @@ const persistConfig = {
   whitelist: ['token', 'isLoggedIn'],
 };
 
-const rootReducer = combineReducers({
-  rabbits: RabbitsReducer,
-  filter: filterReduce,
-});
-
 const persistedReducer = persistReducer(persistConfig, authReducer);
 
 export const store = configureStore({
   reducer: {
     auth: persistedReducer,
-    rabbits: rootReducer,
+    rabbits: RabbitsReducer,
+    filter: filterReduce,
   },
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware({

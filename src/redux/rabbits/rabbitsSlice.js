@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import {
   fetchRabbits,
   fetchRabbitsBreed,
-  addContact,
+  addRabbit,
   deleteRabbit,
   fetchCurrentRabbits,
   deleteRabbitBreed,
@@ -48,11 +48,10 @@ const rabbitsSlice = createSlice({
       .addCase(fetchRabbits.rejected, (state, action) => {
         state.error = true;
       })
-      .addCase(addContact.fulfilled, (state, action) => {
-        state.items.push(action.payload);
+      .addCase(addRabbit.fulfilled, (state, action) => {
         state.isLoading = false;
       })
-      .addCase(addContact.pending, (state, action) => {
+      .addCase(addRabbit.pending, (state, action) => {
         state.isLoading = true;
       })
       .addCase(deleteRabbit.fulfilled, (state, action) => {

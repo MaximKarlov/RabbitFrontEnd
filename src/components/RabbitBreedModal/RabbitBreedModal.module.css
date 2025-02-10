@@ -1,0 +1,44 @@
+.modal {
+  display: flex;
+  justify-content: center;
+  width: 700px;
+  height: 500px;
+  background-color: white;
+  align-items: center;
+  flex-direction: column;
+}
+.modalTitle {
+  text-align: center;
+  font-size: 48px;
+  color: chartreuse;
+}
+.modalInputs {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  font-size: 12px;
+  gap: 30px;
+  width: 90%;
+}
+
+.modalInputs button {
+  text-align: center;
+  width: 300px;
+  text-transform: uppercase;
+  font-size: 20px;
+  font-weight: bold;
+  /* font-style: italic; */
+  font-family: 'Times New Roman', italic;
+}
+
+.modalButtons {
+  display: flex;
+  height: 50px;
+  gap: 50px;
+}
+
+.tableBreed {
+  width: '100%';
+  display: 'flex';
+  justify-content: 'center';
+}
