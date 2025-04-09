@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/RabbitFrontEnd/static/css/main.f10a4cad.css",
-    "main.js": "/RabbitFrontEnd/static/js/main.49091525.js",
+    "main.js": "/RabbitFrontEnd/static/js/main.59e16022.js",
     "static/css/264.d5c45917.chunk.css": "/RabbitFrontEnd/static/css/264.d5c45917.chunk.css",
     "static/js/264.f9e7d0dd.chunk.js": "/RabbitFrontEnd/static/js/264.f9e7d0dd.chunk.js",
     "static/css/490.d5c45917.chunk.css": "/RabbitFrontEnd/static/css/490.d5c45917.chunk.css",
@@ -9,16 +9,16 @@
     "static/css/14.d5c45917.chunk.css": "/RabbitFrontEnd/static/css/14.d5c45917.chunk.css",
     "static/js/14.15a77d44.chunk.js": "/RabbitFrontEnd/static/js/14.15a77d44.chunk.js",
     "static/css/344.217b227a.chunk.css": "/RabbitFrontEnd/static/css/344.217b227a.chunk.css",
-    "static/js/344.edc44d4e.chunk.js": "/RabbitFrontEnd/static/js/344.edc44d4e.chunk.js",
+    "static/js/344.f4052ba9.chunk.js": "/RabbitFrontEnd/static/js/344.f4052ba9.chunk.js",
     "static/css/630.217b227a.chunk.css": "/RabbitFrontEnd/static/css/630.217b227a.chunk.css",
     "static/js/630.ee80050d.chunk.js": "/RabbitFrontEnd/static/js/630.ee80050d.chunk.js",
     "static/css/404.a0a91f0e.chunk.css": "/RabbitFrontEnd/static/css/404.a0a91f0e.chunk.css",
-    "static/js/404.ca1a33c7.chunk.js": "/RabbitFrontEnd/static/js/404.ca1a33c7.chunk.js",
+    "static/js/404.590bedd2.chunk.js": "/RabbitFrontEnd/static/js/404.590bedd2.chunk.js",
     "static/js/422.6f947ace.chunk.js": "/RabbitFrontEnd/static/js/422.6f947ace.chunk.js",
     "static/js/704.6d884907.chunk.js": "/RabbitFrontEnd/static/js/704.6d884907.chunk.js",
     "index.html": "/RabbitFrontEnd/index.html",
     "main.f10a4cad.css.map": "/RabbitFrontEnd/static/css/main.f10a4cad.css.map",
-    "main.49091525.js.map": "/RabbitFrontEnd/static/js/main.49091525.js.map",
+    "main.59e16022.js.map": "/RabbitFrontEnd/static/js/main.59e16022.js.map",
     "264.d5c45917.chunk.css.map": "/RabbitFrontEnd/static/css/264.d5c45917.chunk.css.map",
     "264.f9e7d0dd.chunk.js.map": "/RabbitFrontEnd/static/js/264.f9e7d0dd.chunk.js.map",
     "490.d5c45917.chunk.css.map": "/RabbitFrontEnd/static/css/490.d5c45917.chunk.css.map",
@@ -26,16 +26,16 @@
     "14.d5c45917.chunk.css.map": "/RabbitFrontEnd/static/css/14.d5c45917.chunk.css.map",
     "14.15a77d44.chunk.js.map": "/RabbitFrontEnd/static/js/14.15a77d44.chunk.js.map",
     "344.217b227a.chunk.css.map": "/RabbitFrontEnd/static/css/344.217b227a.chunk.css.map",
-    "344.edc44d4e.chunk.js.map": "/RabbitFrontEnd/static/js/344.edc44d4e.chunk.js.map",
+    "344.f4052ba9.chunk.js.map": "/RabbitFrontEnd/static/js/344.f4052ba9.chunk.js.map",
     "630.217b227a.chunk.css.map": "/RabbitFrontEnd/static/css/630.217b227a.chunk.css.map",
     "630.ee80050d.chunk.js.map": "/RabbitFrontEnd/static/js/630.ee80050d.chunk.js.map",
     "404.a0a91f0e.chunk.css.map": "/RabbitFrontEnd/static/css/404.a0a91f0e.chunk.css.map",
-    "404.ca1a33c7.chunk.js.map": "/RabbitFrontEnd/static/js/404.ca1a33c7.chunk.js.map",
+    "404.590bedd2.chunk.js.map": "/RabbitFrontEnd/static/js/404.590bedd2.chunk.js.map",
     "422.6f947ace.chunk.js.map": "/RabbitFrontEnd/static/js/422.6f947ace.chunk.js.map",
     "704.6d884907.chunk.js.map": "/RabbitFrontEnd/static/js/704.6d884907.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.f10a4cad.css",
-    "static/js/main.49091525.js"
+    "static/js/main.59e16022.js"
   ]
 }
