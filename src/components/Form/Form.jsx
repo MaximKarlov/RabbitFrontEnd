@@ -1,6 +1,6 @@
 import FormCss from '../Form/Form.module.css';
 import { useSelector, useDispatch } from 'react-redux';
-import { addContact } from '../../redux/rabbits/rabbitsOperation';
+// import { addContact } from '../../redux/rabbits/rabbitsOperation';
 import { getRabbits } from '../../redux/rabbits/rabbitsSelector';
 import AddIcon from '@mui/icons-material/Add';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
@@ -26,7 +26,7 @@ export const RabbitForm = () => {
         name,
         number,
       };
-      dispatch(addContact(newUser));
+      // dispatch(addContact(newUser));
       e.target.name.value = e.target.phone.value = '';
     }
   };
