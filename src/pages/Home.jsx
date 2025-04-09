@@ -14,7 +14,7 @@ const Home = () => {
         </Link>
         або
         <NavLink to="/login" className={CSS.linked}>
-          <span> увійти </span>.
+          <span> увійти </span>
         </NavLink>
         в систему
       </p>

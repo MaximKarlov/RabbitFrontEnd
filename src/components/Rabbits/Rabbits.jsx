@@ -10,7 +10,7 @@ import {
 } from '../../redux/rabbits/rabbitsOperation';
 import {
   getRabbits,
-  // getRabbitsBreed,
+  getRabbitsBreed,
   // getError,
   getIsLoading,
 } from '../../redux/rabbits/rabbitsSelector';
