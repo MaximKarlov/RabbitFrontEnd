@@ -44,11 +44,9 @@ export default function AddRabbitModal({ openModal, closeModal }) {
   };
 
   const handleChange = event => {
-    console.log(event);
     switch (event.target.id) {
       case 'Name':
         setName(event.target.value);
-        console.log('name', name);
         break;
       default:
         break;

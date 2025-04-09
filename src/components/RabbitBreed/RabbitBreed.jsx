@@ -2,6 +2,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Loader } from '../Loader/Loader';
 import { useEffect, useState } from 'react';
 import * as MUI from '@mui/material';
+import { NavLink } from 'react-router-dom';
 import RabbitBreedItems from '../RabbitBreed/RabbitBreedItems';
 import { fetchRabbitsBreed } from '../../redux/rabbits/rabbitsOperation';
 import {
@@ -34,6 +35,11 @@ export const RabbitBreedList = () => {
       <div>
         {isLoading ? <Loader /> : <RabbitBreedItems BreedList={breed} />}
       </div>
+      <NavLink to="/rabbits" className={CSS.linked}>
+        <MUI.Button variant="outlined" onClick={openClick}>
+          {`<-`} Back
+        </MUI.Button>
+      </NavLink>
       <MUI.Button variant="outlined" onClick={openClick}>
         Add Breed
       </MUI.Button>
