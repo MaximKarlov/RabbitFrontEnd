@@ -21,15 +21,23 @@
 } */
 
 .layout_items {
+  margin: 0;
+  padding: 0;
   display: flex;
-  padding: 10px;
+  /* padding: 10px; */
   border-bottom: 1px solid gray;
   list-style: none;
   justify-content: space-between;
   align-items: center;
 }
 .layout_item {
-  padding: 0px 20px;
+  /* padding: 0px 20px; */
+}
+.layout_item:first-child {
+  padding-left: 40px;
+}
+.layout_item:last-child {
+  padding-right: 40px;
 }
 .active {
   color: yellow;
@@ -44,6 +52,7 @@
 
 .regLogItems {
   display: flex;
+  padding-right: 40px;
   width: 200px;
   justify-content: space-between;
   list-style: none;
@@ -56,4 +65,12 @@
 
 .btn {
   margin-left: 30px;
+}
+.homeBtn {
+  width: 40px;
+  height: 40px;
+}
+.headerLogo {
+  width: 60px;
+  height: 60px;
 }

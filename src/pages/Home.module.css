@@ -1,5 +1,5 @@
 .bodyItem {
-  margin: 100px;
+  /* margin: 100px; */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -70,4 +70,9 @@
 }
 .active {
   color: yellow;
+}
+
+.logoIn {
+  width: 500px;
+  height: 500px;
 }

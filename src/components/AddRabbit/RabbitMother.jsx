@@ -1,10 +1,10 @@
-import { useSelector } from 'react-redux';
+// import { useSelector } from 'react-redux';
 import * as MUI from '@mui/material';
-import { getRabbits } from '../../redux/rabbits/rabbitsSelector';
+// import { getRabbits } from '../../redux/rabbits/rabbitsSelector';
 
 export const RabbitMother = ({ mother, onChangeMother }) => {
   // Отримуємо частини стану
-  const { rabbits } = useSelector(getRabbits);
+  // const { rabbits } = useSelector(getRabbits);
   // const isLoading = useSelector(getIsLoading);
 
   return (
@@ -17,7 +17,8 @@ export const RabbitMother = ({ mother, onChangeMother }) => {
         label="Mother"
         onChange={onChangeMother}
       >
-        {rabbits.map(el =>
+        <MUI.MenuItem value="-">-</MUI.MenuItem>
+        {/* {rabbits.map(el =>
           el.gender === 'Самка' ? (
             <MUI.MenuItem id={el._id} key={el._id} value={el.name}>
               {el.name}
@@ -25,7 +26,7 @@ export const RabbitMother = ({ mother, onChangeMother }) => {
           ) : (
             <MUI.MenuItem value="-">-</MUI.MenuItem>
           )
-        )}
+        )} */}
       </MUI.Select>
     </MUI.FormControl>
   );
