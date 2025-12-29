@@ -1,0 +1,25 @@
+.TuyaInfo{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: stretch;
+    border-left: 1px;
+}
+.Modal{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+
+}
+.Modal div{
+    width: 100%;
+}
+.BtnModal{
+     display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: center;
+    margin: 20px;
+    gap:20px;
+}

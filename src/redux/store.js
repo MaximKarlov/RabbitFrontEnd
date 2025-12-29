@@ -12,7 +12,10 @@ import {
 import storage from 'redux-persist/lib/storage';
 import { authReducer } from './auth/authSlice';
 import { RabbitsReducer } from './rabbits/rabbitsSlice';
-import { filterReduce } from './rabbits/filter';
+import {FeedReducer } from './feed/feedSlice'
+// import { filterReduce } from './rabbits/filter';
+// import { tuyaAuthReducer } from './tuya_auth/tuyaSlice';
+
 
 const persistConfig = {
   key: 'auth',
@@ -26,7 +29,9 @@ export const store = configureStore({
   reducer: {
     auth: persistedReducer,
     rabbits: RabbitsReducer,
-    filter: filterReduce,
+    feeds: FeedReducer,
+    // filter: filterReduce,
+    // tuya: tuyaAuthReducer,
   },
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware({

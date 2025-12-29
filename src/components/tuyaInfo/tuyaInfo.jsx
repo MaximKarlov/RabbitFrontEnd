@@ -1,11 +1,13 @@
-// import FormCss from '../Form/Form.module.css';
 import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import * as MUI from '@mui/material';
+import tuyaCss from './tuyaInfo.module.css'
+import SettingsIcon from '@mui/icons-material/Settings';
 import AddOutlinedIcon from '@mui/icons-material/AddOutlined';
-import AddRabbitModal from '../AddRabbitModal/AddRabbitModal';
+import TuyaInfoModal from '../tuyaInfoModal/tuyaInfoModal';
 
-export const ButtonMenu = () => {
+
+export const TuyaInfo = () => {
   // const location = useLocation();
 
   const [open, setOpen] = useState(false);
@@ -19,17 +21,13 @@ export const ButtonMenu = () => {
 
   return (
     <>
-      <div>
+      <div className={tuyaCss.TuyaInfo}>
         <MUI.Button
-          variant="outlined"
-          startIcon={<AddOutlinedIcon />}
+          startIcon={<SettingsIcon />}
           type="text"
-          // className={ContactCss.btn}
           onClick={openModal}
-        >
-          ADD Rabbit
-        </MUI.Button>
-        <NavLink to="/rabbits/breedList" className={CSS.linked}>
+        ></MUI.Button>
+        <NavLink to="/" className={CSS.linked}>
           <MUI.Button
             variant="outlined"
             startIcon={<AddOutlinedIcon />}
@@ -37,25 +35,11 @@ export const ButtonMenu = () => {
             // className={ContactCss.btn}\
             // onClick={() => dispatch(deleteContact(id))}
           >
-            Breed
+            info 2
           </MUI.Button>
         </NavLink>
-        <NavLink to="/rabbits/feedList" className={CSS.linked}>
-          <MUI.Button
-            variant="outlined"
-            startIcon={<AddOutlinedIcon />}
-            type="text"
-            // className={ContactCss.btn}\
-            // onClick={() => dispatch(deleteContact(id))}
-          >
-            Feed
-          </MUI.Button>
-        </NavLink>
-        {open ? (
-          <AddRabbitModal openModal={open} closeModal={closeModal} />
-        ) : (
-          ''
-        )}
+
+        {open ? <TuyaInfoModal openModal={open} closeModal={closeModal} /> : ''}
       </div>
       {/* 
       <MUI.Stack direction="row" spacing={2}></MUI.Stack>

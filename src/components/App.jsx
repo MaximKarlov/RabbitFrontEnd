@@ -5,6 +5,8 @@ import { PrivateRoute } from './PrivateRoute';
 import { RestrictedRoute } from './RestrictedRoute';
 import { fetchCurrentUser } from '../redux/auth/authOperation';
 import { fetchCurrentRabbits } from '../redux/rabbits/rabbitsOperation';
+import {fetchFeeds} from '../redux/feed/feedOperation'
+
 import { Layout } from './Layout';
 
 const Home = lazy(() => import('../pages/Home'));
@@ -13,6 +15,7 @@ const Login = lazy(() => import('../pages/Login'));
 const Rabbits = lazy(() => import('../pages/Rabbits'));
 const AddRabbit = lazy(() => import('../pages/AddRabbit'));
 const RabbitBreed = lazy(() => import('../pages/RabbitBreed'));
+const Feed = lazy(()=> import ('../pages/Feed'))
 
 export const App = () => {
   const dispatch = useDispatch();
@@ -20,6 +23,7 @@ export const App = () => {
   useEffect(() => {
     dispatch(fetchCurrentUser());
     dispatch(fetchCurrentRabbits());
+    dispatch(fetchFeeds());
   }, [dispatch]);
 
   return (
@@ -54,6 +58,18 @@ export const App = () => {
             path="/rabbits/breedList"
             element={
               <PrivateRoute redirectTo="/rabbits" component={<RabbitBreed />} />
+            }
+          />
+          <Route
+            path="/rabbits/FeedList"
+            element={
+              <PrivateRoute redirectTo="/rabbits" component={<Feed />} />
+            }
+          />
+          <Route
+            path="/tuya/getToken"
+            element={
+              <PrivateRoute redirectTo="/tuya" component={<RabbitBreed />} />
             }
           />
         </Route>

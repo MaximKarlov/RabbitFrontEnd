@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from 'react-redux';
-import { RabbitsItem } from './Rabbits_item';
+import  RabbitsItem  from './Rabbits_item';
 // import { AddRabbitModal } from '../AddRabbitModal/AddRabbitModal';
 import { Loader } from '../Loader/Loader';
 import { useEffect } from 'react';

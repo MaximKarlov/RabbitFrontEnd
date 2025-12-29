@@ -11,7 +11,7 @@ import TableCell from '@mui/material/TableCell';
 
 import TableRow from '@mui/material/TableRow';
 
-export const RabbitsItem = ({ Rabbits }) => {
+const RabbitsItem = ({ Rabbits }) => {
   const dispatch = useDispatch();
   // const isLoading = useSelector(getIsLoading);
 
@@ -90,4 +90,6 @@ export const RabbitsItem = ({ Rabbits }) => {
       ))}
     </TableBody>
   );
+
 };
+  export default RabbitsItem;

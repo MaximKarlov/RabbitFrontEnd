@@ -1,0 +1,246 @@
+import axios from 'axios';
+import { createAsyncThunk } from '@reduxjs/toolkit';
+import Notiflix from 'notiflix';
+//localhost:3000/
+
+// axios.defaults.baseURL = 'https://rabbitbackend.onrender.com';
+axios.defaults.baseURL = 'http://localhost:3005';
+
+const token = {
+  set(token) {
+    axios.defaults.headers.common.Authorization = `Bearer ${token}`;
+  },
+  unset() {
+    axios.defaults.headers.common.Authorization = ``;
+  },
+};
+
+/////////////////////RABBITS///////////////////////
+// export const addRabbit = createAsyncThunk(
+//   'rabbit/addRabbit',
+//   async (rabbit, thunkAPI) => {
+//     const state = thunkAPI.getState();
+//     const persistToken = state.auth.token;
+//     token.set(persistToken);
+
+//     try {
+//       const { status } = await axios.post('/rabbits/add', rabbit);
+//       if (status === 201)
+//         Notiflix.Notify.success(
+//           `Кролика додано у базу! ${'\n'} The rabbit was successfully created.`
+//         );
+//       return status;
+//     } catch (err) {
+//       Notiflix.Notify.failure(err.message);
+//       return err.message;
+//     }
+//   }
+// );
+
+// export const fetchRabbits = createAsyncThunk(
+//   'rabbits/fetchAll',
+//   async (_, thunkAPI) => {
+//     const state = thunkAPI.getState();
+//     const persistToken = state.auth.token;
+//     token.set(persistToken);
+//     try {
+//       const { data, status } = await axios.get('/rabbits');
+//       if (status === 200 && data.length > 0) return data;
+//     } catch (err) {
+//       Notiflix.Notify.failure(err.message);
+//       return err.message;
+//     }
+//   }
+// );
+
+// export const fetchCurrentRabbits = createAsyncThunk(
+//   'rabbits/refresh',
+//   async (_, thunkAPI) => {
+//     const state = thunkAPI.getState();
+//     const persistToken = state.auth.token;
+
+//     if (persistToken === null) {
+//       // console.log('Токена не існує');
+//       return thunkAPI.rejectWithValue();
+//     }
+
+//     token.set(persistToken);
+//     try {
+//       const first = await axios.get('/rabbits');
+//       const second = await axios.get('/rabbits/breeds');
+//       if (first.status === 401 || second.status === 401) token.unset();
+//       const data = [first.data, second.data];
+//       return data;
+//     } catch (err) {
+//       return thunkAPI.rejectWithValue(err);
+//     }
+//   }
+// );
+
+// export const fetchRabbitsBreed = createAsyncThunk(
+//   'rabbits/fetchBreedAll',
+//   async (_, thunkAPI) => {
+//     const state = thunkAPI.getState();
+//     const persistToken = state.auth.token;
+//     token.set(persistToken);
+//     try {
+//       const { data } = await axios.get('/rabbits/breeds');
+//       return data;
+//     } catch (err) {
+//       if (err.response.status === 404) {
+//         Notiflix.Notify.failure(err.message);
+//         return err.message;
+//       }
+//     }
+//   }
+// );
+
+// export const updateContact = createAsyncThunk(
+//   'rabbit/updateRabbit',
+//   async (id, { rejectWithValue }, thunkAPI) => {
+//     const state = thunkAPI.getState();
+//     const persistToken = state.auth.token;
+//     token.set(persistToken);
+
+//     try {
+//       const { data, status } = await axios.patch(`rabbits/${id}`);
+//       if (status === 200)
+//         Notiflix.Notify.success(
+//           'Кролика редаговано у базі. \n The rabbit was successfully updated.'
+//         );
+//       return data;
+//     } catch (err) {
+//       Notiflix.Notify.failure(err.message);
+//       return rejectWithValue(err.message);
+//     }
+//   }
+// );
+
+// export const findRabbitById = createAsyncThunk(
+//   'rabbit/findById',
+//   async (id, { rejectWithValue }) => {
+//     try {
+//       const { data, status } = await axios.get(`/rabbits/${id}`);
+//       if (status === 200) return console.log(data);
+//     } catch (err) {
+//       Notiflix.Notify.failure(err.message);
+//       return rejectWithValue(err.message);
+//     }
+//   }
+// );
+
+// export const deleteRabbit = createAsyncThunk(
+//   'rabbit/deleteRabbit',
+//   async (id, { rejectWithValue }) => {
+//     try {
+//       const { status } = await axios.delete(`/rabbits/${id}`);
+//       if (status === 200)
+//         Notiflix.Notify.success(
+//           `Кролика видалено з бази! \n  The rabbit was successfully deleted.`
+//         );
+//       return status;
+//     } catch (err) {
+//       Notiflix.Notify.failure(err.message);
+//       return rejectWithValue(err.message);
+//     }
+//   }
+// );
+
+////////////////Feeds SET////////////////////
+export const addFeed = createAsyncThunk(
+  'feeds/addFeeds',
+  async (feed, thunkAPI) => {
+    const state = thunkAPI.getState();
+    const persistToken = state.auth.token;
+    token.set(persistToken);
+
+    try {
+      const { status } = await axios.post('/feeds/add', feed);
+      if (status === 201)
+        Notiflix.Notify.success(
+          `Корм додано у базу! ${'\n'} The feed was successfully created.`
+        );
+      return status;
+    } catch (err) {
+      Notiflix.Notify.failure(err.message);
+      return err.message;
+    }
+  }
+);
+
+export const fetchFeeds = createAsyncThunk('feeds/refresh', async (_, thunkAPI) => {
+  const state = thunkAPI.getState();
+  const persistToken = state.auth.token;
+
+  if (persistToken === null) {
+    // console.log('Токена не існує');
+    return thunkAPI.rejectWithValue();
+  }
+
+  token.set(persistToken);
+  try {
+    const first = await axios.get('feeds');
+    if (first.status === 401 ) token.unset();
+    const data = [first.data];
+    return data;
+  } catch (err) {
+    return thunkAPI.rejectWithValue(err);
+  }
+});
+
+
+export const findCurrentFeedById = createAsyncThunk(
+  'feeds/findCurrentFeedById',
+  async (id, { rejectWithValue }) => {
+    try {
+      const { data, status } = await axios.get(`/rabbits/breeds/${id}`);
+      if (status === 200) return data;
+    } catch (err) {
+      Notiflix.Notify.failure(err.message);
+      return rejectWithValue(err.message);
+    }
+  }
+);
+
+export const updateFeed = createAsyncThunk(
+  'feeds/updateFeed',
+  async (objectsToSend, thunkAPI) => {
+    console.log('object', objectsToSend[1]);
+    console.log('id', objectsToSend[0]);
+    const state = thunkAPI.getState();
+    const persistToken = state.auth.token;
+    token.set(persistToken);
+
+    try {
+      const { data, status } = await axios.put(
+        `/rabbits/breeds/${objectsToSend[0]}`,
+        objectsToSend[1]
+      );
+      if (status === 200)
+        Notiflix.Notify.success(
+          'Корм редаговано у базі. \n The feed was successfully updated.'
+        );
+      return data;
+    } catch (err) {
+      Notiflix.Notify.failure(err.message);
+      // return rejectWithValue(err.message);
+    }
+  }
+);
+
+export const deleteFeed = createAsyncThunk(
+  'feeds/deletFeed',
+  async (id, { rejectWithValue }) => {
+    try {
+      const { status } = await axios.delete(`feeds/delete/${id}`);
+      if (status === 200)
+        Notiflix.Notify.success(
+          `Корм видалено з бази! \n  The feed was successfully deleted.`
+        );
+      return status;
+    } catch (err) {
+      Notiflix.Notify.failure(err.message);
+      return rejectWithValue(err.message);
+    }
+  }
+);
