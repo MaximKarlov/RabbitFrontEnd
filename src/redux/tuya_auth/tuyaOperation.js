@@ -11,8 +11,8 @@ import axios from 'axios';
 // import Notiflix from 'notiflix';
 
 
-// axios.defaults.baseURL = 'https://rabbitbackend.onrender.com';
-axios.defaults.baseURL = 'http://localhost:3005';
+axios.defaults.baseURL = 'https://rabbitbackend.onrender.com';
+
 
 const token = {
   set(token) {

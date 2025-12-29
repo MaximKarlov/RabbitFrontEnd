@@ -1,10 +1,10 @@
 import axios from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import Notiflix from 'notiflix';
-// axios.defaults.baseURL = 'http://localhost:3005/';
-// axios.defaults.baseURL = 'https://maximkarlov.github.io/RabbitBackEnd';
+
+
 axios.defaults.baseURL = 'https://rabbitbackend.onrender.com';
-// https://maximkarlov.github.io/RabbitBackEnd/
+
 
 const token = {
   set(token) {
