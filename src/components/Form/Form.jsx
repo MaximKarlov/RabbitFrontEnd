@@ -1,5 +1,6 @@
 import FormCss from '../Form/Form.module.css';
-import { useSelector, useDispatch } from 'react-redux';
+// import { useSelector, useDispatch } from 'react-redux';
+import { useSelector} from 'react-redux';
 // import { addContact } from '../../redux/rabbits/rabbitsOperation';
 import { getRabbits } from '../../redux/rabbits/rabbitsSelector';
 import AddIcon from '@mui/icons-material/Add';
@@ -12,7 +13,7 @@ let newUser = [];
 
 export const RabbitForm = () => {
   const { items } = useSelector(getRabbits);
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
   const addingContacts = e => {
     e.preventDefault();
