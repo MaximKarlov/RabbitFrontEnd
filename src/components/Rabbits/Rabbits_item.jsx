@@ -6,9 +6,7 @@ import {
 } from '../../redux/rabbits/rabbitsOperation';
 import { Button } from '@mui/material';
 import { Delete, Edit } from '@mui/icons-material';
-import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
-
 import TableRow from '@mui/material/TableRow';
 
 const RabbitsItem = ({ Rabbits }) => {
