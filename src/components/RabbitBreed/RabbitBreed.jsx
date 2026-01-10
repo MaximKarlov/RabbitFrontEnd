@@ -10,6 +10,7 @@ import {
   getIsLoading,
 } from '../../redux/rabbits/rabbitsSelector';
 import { RabbitBreedModal } from '../RabbitBreedModal/RabbitBreedModal';
+import CSS from '../btnMenu/btnMenu.module.css';
 
 export const RabbitBreedList = () => {
   const [addBreed, setAddBreed] = useState(false);
@@ -35,14 +36,16 @@ export const RabbitBreedList = () => {
       <div>
         {isLoading ? <Loader /> : <RabbitBreedItems BreedList={breed} />}
       </div>
-      <NavLink to="/rabbits" className={CSS.linked}>
+      <div className={CSS.btn}>
+        <NavLink to="/rabbits">
+          <MUI.Button variant="outlined" onClick={openClick}>
+            {`<-`} Back
+          </MUI.Button>
+        </NavLink>
         <MUI.Button variant="outlined" onClick={openClick}>
-          {`<-`} Back
+          Add Breed
         </MUI.Button>
-      </NavLink>
-      <MUI.Button variant="outlined" onClick={openClick}>
-        Add Breed
-      </MUI.Button>
+      </div>
       {addBreed ? (
         <RabbitBreedModal open={addBreed} close={closeClick} edit={false} />
       ) : (

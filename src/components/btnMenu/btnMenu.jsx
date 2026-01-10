@@ -4,6 +4,7 @@ import { NavLink } from 'react-router-dom';
 import * as MUI from '@mui/material';
 import AddOutlinedIcon from '@mui/icons-material/AddOutlined';
 import AddRabbitModal from '../AddRabbitModal/AddRabbitModal';
+import buttonCss from './btnMenu.module.css';
 
 export const ButtonMenu = () => {
   // const location = useLocation();
@@ -19,7 +20,7 @@ export const ButtonMenu = () => {
 
   return (
     <>
-      <div>
+      <div className={buttonCss.btn}>
         <MUI.Button
           variant="outlined"
           startIcon={<AddOutlinedIcon />}

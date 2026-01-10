@@ -7,6 +7,7 @@ import FeedItems from '../Feed/FeedItems';
 import { fetchFeeds } from '../../redux/feed/feedOperation';
 import { getFeeds, getFeedLoading } from '../../redux/feed/feedSelector';
 import { AddFeedModal } from './AddFeedModal';
+import CSS from '../btnMenu/btnMenu.module.css';
 
 export const Feed = () => {
   const [addFeed, setAddFeed] = useState(false);
@@ -31,14 +32,16 @@ export const Feed = () => {
   return (
     <div>
       <div> {isLoading ? <Loader /> : <FeedItems FeedsList={feeds} />}</div>
-      <NavLink to="/rabbits" className={CSS.linked}>
+      <div className={CSS.btn}>
+        <NavLink to="/rabbits">
+          <MUI.Button variant="outlined" onClick={openClick}>
+            {`<-`} Back
+          </MUI.Button>
+        </NavLink>
         <MUI.Button variant="outlined" onClick={openClick}>
-          {`<-`} Back
+          Add bay Feed
         </MUI.Button>
-      </NavLink>
-      <MUI.Button variant="outlined" onClick={openClick}>
-        Add bay Feed
-      </MUI.Button>
+      </div>
       {addFeed ? (
         <AddFeedModal open={addFeed} close={closeClick} edit={false} />
       ) : (

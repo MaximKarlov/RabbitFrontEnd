@@ -2,7 +2,9 @@ import axios from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import Notiflix from 'notiflix';
 
-axios.defaults.baseURL = 'https://rabbitbackend.onrender.com';
+// axios.defaults.baseURL = 'https://rabbitbackend.onrender.com';
+axios.defaults.baseURL = 'http://localhost:3005';
+
 
 const token = {
   set(token) {

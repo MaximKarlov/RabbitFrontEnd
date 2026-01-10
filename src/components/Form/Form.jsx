@@ -1,7 +1,7 @@
 import FormCss from '../Form/Form.module.css';
-// import { useSelector, useDispatch } from 'react-redux';
-import { useSelector} from 'react-redux';
-// import { addContact } from '../../redux/rabbits/rabbitsOperation';
+import { useSelector, useDispatch } from 'react-redux';
+// import { useSelector} from 'react-redux';
+import { addContact } from '../../redux/rabbits/rabbitsOperation';
 import { getRabbits } from '../../redux/rabbits/rabbitsSelector';
 import AddIcon from '@mui/icons-material/Add';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
@@ -9,11 +9,12 @@ import LocalPhoneIcon from '@mui/icons-material/LocalPhone';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 
-let newUser = [];
+
+
 
 export const RabbitForm = () => {
   const { items } = useSelector(getRabbits);
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
   const addingContacts = e => {
     e.preventDefault();
@@ -23,11 +24,11 @@ export const RabbitForm = () => {
       alert(`${name} is already existing`);
       e.target.name.value = '';
     } else {
-      newUser = {
+      const newUser = {
         name,
         number,
       };
-      // dispatch(addContact(newUser));
+      dispatch(addContact(newUser));
       e.target.name.value = e.target.phone.value = '';
     }
   };

@@ -44,7 +44,7 @@ const RabbitsItem = ({ Rabbits }) => {
   };
 
   return (
-    <TableBody>
+    <>
       {rowsRabbit.map(row => (
         <TableRow
           _id={row._id}
@@ -88,7 +88,7 @@ const RabbitsItem = ({ Rabbits }) => {
           </TableCell>
         </TableRow>
       ))}
-    </TableBody>
+    </>
   );
 
 };
