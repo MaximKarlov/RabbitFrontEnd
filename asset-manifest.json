@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/RabbitFrontEnd/static/css/main.147a555f.css",
-    "main.js": "/RabbitFrontEnd/static/js/main.fe48e7bf.js",
+    "main.js": "/RabbitFrontEnd/static/js/main.43e9a5de.js",
     "static/css/320.95d40d7f.chunk.css": "/RabbitFrontEnd/static/css/320.95d40d7f.chunk.css",
     "static/js/320.eeb82e02.chunk.js": "/RabbitFrontEnd/static/js/320.eeb82e02.chunk.js",
     "static/css/490.95d40d7f.chunk.css": "/RabbitFrontEnd/static/css/490.95d40d7f.chunk.css",
@@ -24,7 +24,7 @@
     "static/media/home.png": "/RabbitFrontEnd/static/media/home.6ebb861aa6d3dc9312fe.png",
     "index.html": "/RabbitFrontEnd/index.html",
     "main.147a555f.css.map": "/RabbitFrontEnd/static/css/main.147a555f.css.map",
-    "main.fe48e7bf.js.map": "/RabbitFrontEnd/static/js/main.fe48e7bf.js.map",
+    "main.43e9a5de.js.map": "/RabbitFrontEnd/static/js/main.43e9a5de.js.map",
     "320.95d40d7f.chunk.css.map": "/RabbitFrontEnd/static/css/320.95d40d7f.chunk.css.map",
     "320.eeb82e02.chunk.js.map": "/RabbitFrontEnd/static/js/320.eeb82e02.chunk.js.map",
     "490.95d40d7f.chunk.css.map": "/RabbitFrontEnd/static/css/490.95d40d7f.chunk.css.map",
@@ -44,6 +44,6 @@
   },
   "entrypoints": [
     "static/css/main.147a555f.css",
-    "static/js/main.fe48e7bf.js"
+    "static/js/main.43e9a5de.js"
   ]
 }
