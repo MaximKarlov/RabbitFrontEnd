@@ -2,8 +2,8 @@ import axios from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import Notiflix from 'notiflix';
 
-// axios.defaults.baseURL = 'https://rabbitbackend.onrender.com';
-axios.defaults.baseURL = 'http://localhost:3005';
+axios.defaults.baseURL = 'https://rabbitbackend.onrender.com';
+// axios.defaults.baseURL = 'http://localhost:3005';
 
 
 const token = {
@@ -14,137 +14,6 @@ const token = {
     axios.defaults.headers.common.Authorization = ``;
   },
 };
-
-/////////////////////RABBITS///////////////////////
-// export const addRabbit = createAsyncThunk(
-//   'rabbit/addRabbit',
-//   async (rabbit, thunkAPI) => {
-//     const state = thunkAPI.getState();
-//     const persistToken = state.auth.token;
-//     token.set(persistToken);
-
-//     try {
-//       const { status } = await axios.post('/rabbits/add', rabbit);
-//       if (status === 201)
-//         Notiflix.Notify.success(
-//           `Кролика додано у базу! ${'\n'} The rabbit was successfully created.`
-//         );
-//       return status;
-//     } catch (err) {
-//       Notiflix.Notify.failure(err.message);
-//       return err.message;
-//     }
-//   }
-// );
-
-// export const fetchRabbits = createAsyncThunk(
-//   'rabbits/fetchAll',
-//   async (_, thunkAPI) => {
-//     const state = thunkAPI.getState();
-//     const persistToken = state.auth.token;
-//     token.set(persistToken);
-//     try {
-//       const { data, status } = await axios.get('/rabbits');
-//       if (status === 200 && data.length > 0) return data;
-//     } catch (err) {
-//       Notiflix.Notify.failure(err.message);
-//       return err.message;
-//     }
-//   }
-// );
-
-// export const fetchCurrentRabbits = createAsyncThunk(
-//   'rabbits/refresh',
-//   async (_, thunkAPI) => {
-//     const state = thunkAPI.getState();
-//     const persistToken = state.auth.token;
-
-//     if (persistToken === null) {
-//       // console.log('Токена не існує');
-//       return thunkAPI.rejectWithValue();
-//     }
-
-//     token.set(persistToken);
-//     try {
-//       const first = await axios.get('/rabbits');
-//       const second = await axios.get('/rabbits/breeds');
-//       if (first.status === 401 || second.status === 401) token.unset();
-//       const data = [first.data, second.data];
-//       return data;
-//     } catch (err) {
-//       return thunkAPI.rejectWithValue(err);
-//     }
-//   }
-// );
-
-// export const fetchRabbitsBreed = createAsyncThunk(
-//   'rabbits/fetchBreedAll',
-//   async (_, thunkAPI) => {
-//     const state = thunkAPI.getState();
-//     const persistToken = state.auth.token;
-//     token.set(persistToken);
-//     try {
-//       const { data } = await axios.get('/rabbits/breeds');
-//       return data;
-//     } catch (err) {
-//       if (err.response.status === 404) {
-//         Notiflix.Notify.failure(err.message);
-//         return err.message;
-//       }
-//     }
-//   }
-// );
-
-// export const updateContact = createAsyncThunk(
-//   'rabbit/updateRabbit',
-//   async (id, { rejectWithValue }, thunkAPI) => {
-//     const state = thunkAPI.getState();
-//     const persistToken = state.auth.token;
-//     token.set(persistToken);
-
-//     try {
-//       const { data, status } = await axios.patch(`rabbits/${id}`);
-//       if (status === 200)
-//         Notiflix.Notify.success(
-//           'Кролика редаговано у базі. \n The rabbit was successfully updated.'
-//         );
-//       return data;
-//     } catch (err) {
-//       Notiflix.Notify.failure(err.message);
-//       return rejectWithValue(err.message);
-//     }
-//   }
-// );
-
-// export const findRabbitById = createAsyncThunk(
-//   'rabbit/findById',
-//   async (id, { rejectWithValue }) => {
-//     try {
-//       const { data, status } = await axios.get(`/rabbits/${id}`);
-//       if (status === 200) return console.log(data);
-//     } catch (err) {
-//       Notiflix.Notify.failure(err.message);
-//       return rejectWithValue(err.message);
-//     }
-//   }
-// );
-
-// export const deleteRabbit = createAsyncThunk(
-//   'rabbit/deleteRabbit',
-//   async (id, { rejectWithValue }) => {
-//     try {
-//       const { status } = await axios.delete(`/rabbits/${id}`);
-//       if (status === 200)
-//         Notiflix.Notify.success(
-//           `Кролика видалено з бази! \n  The rabbit was successfully deleted.`
-//         );
-//       return status;
-//     } catch (err) {
-//       Notiflix.Notify.failure(err.message);
-//       return rejectWithValue(err.message);
-//     }
-//   }
-// );
 
 ////////////////Feeds SET////////////////////
 export const addFeed = createAsyncThunk(

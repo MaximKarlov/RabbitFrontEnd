@@ -1,6 +1,5 @@
 import { useSelector, useDispatch } from 'react-redux';
 import  RabbitsItem  from './Rabbits_item';
-// import { AddRabbitModal } from '../AddRabbitModal/AddRabbitModal';
 import { Loader } from '../Loader/Loader';
 import { useEffect } from 'react';
 
@@ -63,11 +62,6 @@ export const RabbitList = () => {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {/* {isLoading ? (
-                  <Loader />
-                ) : rabbits ? (
-                  <RabbitsItem Rabbits={rabbits} />
-                ) : null} */}
                 {isLoading ? (
                   <TableRow>
                     <TableCell colSpan={12} align="center">
