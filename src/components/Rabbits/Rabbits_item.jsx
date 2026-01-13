@@ -13,11 +13,19 @@ const RabbitsItem = ({ Rabbits }) => {
   const dispatch = useDispatch();
   // const isLoading = useSelector(getIsLoading);
 
-  const rowsRabbit = [];
+  // якщо Rabbits не масив, повертаємо повідомлення
+  if (!Array.isArray(Rabbits)) {
+    return (
+      <TableRow>
+        <TableCell colSpan={12} align="center">
+          Немає даних
+        </TableCell>
+      </TableRow>
+    );
+  }
 
-  Rabbits.map(el =>
-    rowsRabbit.push({
-      id: Rabbits.indexOf(el) + 1,
+  const rowsRabbit = Rabbits.map((el , index) =>({
+      id: index + 1,
       _id: el._id,
       gender: el.gender,
       name: el.name,
@@ -28,8 +36,8 @@ const RabbitsItem = ({ Rabbits }) => {
       mother: el.mother,
       father: el.father,
       favorite: el.favorite,
-    })
-  );
+ 
+}));
 
   const deleteRabbits = e => {
     const rabbitID = e.target.parentElement.parentElement.getAttribute('_id');
@@ -88,6 +96,5 @@ const RabbitsItem = ({ Rabbits }) => {
       ))}
     </>
   );
-
 };
   export default RabbitsItem;

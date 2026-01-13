@@ -68,7 +68,7 @@ export const RabbitList = () => {
                       <Loader />
                     </TableCell>
                   </TableRow>
-                ) : rabbits ? (
+                ) : rabbits && rabbits.length > 0 ? (
                   <RabbitsItem Rabbits={rabbits} />
                 ) : (
                   <TableRow>
