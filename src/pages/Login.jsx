@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import Button from '@mui/material/Button';
 import LoginIcon from '@mui/icons-material/Login';
 import TextField from '@mui/material/TextField';
@@ -15,6 +16,7 @@ import { logInUser } from '../redux/auth/authOperation';
 
 const Login = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
@@ -41,9 +43,15 @@ const Login = () => {
   };
   // const location = useLocation();
 
-  const loggInUser = e => {
+  const loggInUser =async e => {
     e.preventDefault();
-    dispatch(logInUser({ email, password }));
+    const result = await dispatch(logInUser({ email, password }));
+    const  emailToResend  = result.meta.arg.email;
+     if (logInUser.rejected.match(result)) {
+      
+      navigate('/login/resend', {state:{emailToResend}}); // редирект на потрібну сторінку та передаєио email
+    }
+
   };
 
   return (

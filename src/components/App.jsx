@@ -11,6 +11,7 @@ import { Layout } from './Layout';
 
 const Home = lazy(() => import('../pages/Home'));
 const Register = lazy(() => import('../pages/Register'));
+const Resendemail = lazy(()=> import("../pages/reSendEmail"))
 const Login = lazy(() => import('../pages/Login'));
 const Rabbits = lazy(() => import('../pages/Rabbits'));
 const AddRabbit = lazy(() => import('../pages/AddRabbit'));
@@ -35,9 +36,13 @@ export const App = () => {
           <Route
             path="/register"
             element={
-              <RestrictedRoute redirectTo="/rabbits" component={<Register />} />
+              <RestrictedRoute
+                redirectTo="/login/resend"
+                component={<Register />}
+              />
             }
           />
+
           <Route
             path="/users/verificationSucces"
             element={
@@ -50,7 +55,15 @@ export const App = () => {
               <RestrictedRoute redirectTo="/rabbits" component={<Login />} />
             }
           />
-
+          <Route
+            path="/login/resend"
+            element={
+              <RestrictedRoute
+                redirectTo="/rabbits"
+                component={<Resendemail />}
+              />
+            }
+          />
           <Route
             path="/rabbits"
             element={<PrivateRoute redirectTo="/" component={<Rabbits />} />}

@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import CSS from '../pages/Home.module.css';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
@@ -14,6 +15,7 @@ import { registerUser } from '../redux/auth/authOperation';
 
 const Register = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -45,12 +47,18 @@ const Register = () => {
     }
   };
 
-  const regUser = e => {
+  const regUser =async e => {
     e.preventDefault();
-    dispatch(registerUser({ name, email, password }));
+    const { meta } = await dispatch(
+      registerUser({ name, email, password })
+    );
     setName('');
     setEmail('');
-    setPassword('');
+    setPassword('');;
+    if (meta.requestStatus==="fulfilled") {
+      // ✅ після успішної реєстрації
+      navigate('/login/resend');
+    }
   };
 
   return (
