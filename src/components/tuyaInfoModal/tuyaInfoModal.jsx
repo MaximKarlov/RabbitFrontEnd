@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import * as MUI from '@mui/material/';
+import * as MUI from '@mui/material';
 import {getToken} from '../../redux/tuya_auth/tuyaOperation.js'
 // import { addRabbit, fetchRabbits } from '../../redux/rabbits/rabbitsOperation';
 import TuyaCss from '../tuyaInfo/tuyaInfo.module.css';

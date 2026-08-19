@@ -11,9 +11,6 @@ import axios from 'axios';
 // import Notiflix from 'notiflix';
 
 
-axios.defaults.baseURL = 'https://rabbitbackend.onrender.com';
-
-
 const token = {
   set(token) {
     axios.defaults.headers.common.Authorization = `Bearer ${token}`;

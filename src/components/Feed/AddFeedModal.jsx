@@ -1,11 +1,16 @@
 import * as React from 'react';
+import dayjs from 'dayjs';
 import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import { styled } from '@mui/system';
-import { Modal as BaseModal } from '@mui/base/Modal';
-import RBCSS from '../RabbitBreedModal/RabbitBreedModal.module.css';
+import Modal from '@mui/material/Modal';
+import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import RBCSS from './feed.module.css';
 import * as MUI from '@mui/material';
 import {
   addFeed,
@@ -30,7 +35,7 @@ Backdrop.propTypes = {
   open: PropTypes.bool,
 };
 
-const Modal = styled(BaseModal)`
+const ModalWindows = styled(Modal)`
   position: fixed;
   z-index: 1300;
   inset: 0;
@@ -49,10 +54,12 @@ const StyledBackdrop = styled(Backdrop)`
 `;
 
 export function AddFeedModal({ open, close, edit, id }) {
-  const [dateFeed, setDateFeed] = useState('');
+  const [dateFeed, setDateFeed] = useState(dayjs());
   const [nameFeed, setNameFeed] = useState('');
   const [priceFeed, setPriceFeed] = useState('');
   const [quantityFeed, setQuantityFeed] = useState('');
+  const [quantityBags, setQuantityBags] = useState('');
+  const [FeedSuma, setFeedSuma] = useState('');
   const [btnCheck, setBtnCheck] = useState(false);
 
   const objectsToSend = {
@@ -60,33 +67,55 @@ export function AddFeedModal({ open, close, edit, id }) {
     name: nameFeed,
     price: priceFeed,
     quantity: quantityFeed,
+    bags:quantityBags,
+    suma:FeedSuma,
   };
   const dispatch = useDispatch();
 
   const handleChange = event => {
     switch (event.target.id) {
-      case 'date':
-        setDateFeed(event.target.value);
-        // console.log('nameBreed', nameBreed);
-        break;
       case 'nameFeed':
         setNameFeed(event.target.value);
-        // console.log('nameBreed', nameBreed);
         break;
+
       case 'priceFeed':
         setPriceFeed(event.target.value);
-        // console.log('colorBreed', colorBreed);
-
+        // if (quantityFeed !== '') {
+        //   setFeedSuma(event.target.value * quantityFeed);
+        // }
         break;
+
       case 'quantityFeed':
         setQuantityFeed(event.target.value);
-        // console.log('aboutBreed', aboutBreed);
+          if (quantityBags !== '' & FeedSuma!=='') {
+            const tmp = (FeedSuma / event.target.value).toFixed(2)
+           setPriceFeed(tmp.toString());
+          }
+          if(priceFeed!=='')
+          {
+            setFeedSuma(Math.round(priceFeed * event.target.value).toString());
+          }
+      break;
 
+      case 'quantityBags':
+        setQuantityBags(event.target.value);
         break;
+
+      case 'FeedSuma':
+        setFeedSuma(event.target.value);
+         if (priceFeed !== '') 
+          {
+          const tmp = (event.target.value / priceFeed);
+          setQuantityFeed(tmp.toString());
+          }
+
+      break;
+
       default:
         break;
     }
   };
+
 
   const handleUpdate = e => {
     e.preventDefault();
@@ -106,26 +135,25 @@ export function AddFeedModal({ open, close, edit, id }) {
   };
 
   useEffect(() => {
-    if (edit) {
-      dispatch(findCurrentFeedById(id)).then(el => {
-        setDateFeed(el.payload.date);
-        setNameFeed(el.payload.name);
-        setPriceFeed(el.payload.price);
-        setQuantityFeed(el.payload.quantity);
-
-      });
-    }
-  }, [dispatch, edit, id]);
-
-  useEffect(() => {
     if ((nameFeed !== '') & (priceFeed !== '') & (quantityFeed !== '')) {
       setBtnCheck(false);
     } else setBtnCheck(true);
-  }, [priceFeed, nameFeed, quantityFeed]);
+    if (edit) {
+      dispatch(findCurrentFeedById(id)).then(el => {
+        const rawDate = el.payload.date;
+        setDateFeed(dayjs(rawDate)); 
+        setNameFeed(el.payload.name);
+        setPriceFeed(el.payload.price);
+        setQuantityFeed(el.payload.quantity);
+        setQuantityBags(el.payload.bags);
+        setFeedSuma(el.payload.suma);
+      });
+    }
+  }, [dispatch, edit, id, nameFeed, priceFeed, quantityFeed]);
 
   return (
     <div>
-      <Modal
+      <ModalWindows
         aria-labelledby="unstyled-modal-title"
         aria-describedby="unstyled-modal-description"
         open={open}
@@ -133,20 +161,22 @@ export function AddFeedModal({ open, close, edit, id }) {
         slots={{ backdrop: StyledBackdrop }}
       >
         <div className={RBCSS.modal}>
-          <h2 className={RBCSS.modalTitle}>Add Feeds</h2>
+          <h2 className={RBCSS.modalTitle}>Додавання корму</h2>
           <form className={RBCSS.modalInputs}>
-            <MUI.TextField
-              id="date"
-              label="date"
-              value={dateFeed}
-              variant="outlined"
-              inputProps={{ style: { fontSize: 16 } }}
-              InputLabelProps={{ style: { fontSize: 12 } }}
-              onChange={handleChange}
-            />
+            <LocalizationProvider dateAdapter={AdapterDayjs}>
+              <DemoContainer components={['DatePicker']}>
+                <DatePicker
+                  id="date"
+                  label="Дата"
+                  format="DD.MM.YYYY"
+                  value={dateFeed}
+                  onChange={newValue => setDateFeed(newValue)}
+                />
+              </DemoContainer>
+            </LocalizationProvider>
             <MUI.TextField
               id="nameFeed"
-              label="Name Feed"
+              label="Назва корму"
               value={nameFeed}
               variant="outlined"
               inputProps={{ style: { fontSize: 16 } }}
@@ -155,7 +185,7 @@ export function AddFeedModal({ open, close, edit, id }) {
             />
             <MUI.TextField
               id="priceFeed"
-              label="Price Feed"
+              label="Ціна корму за кг"
               value={priceFeed}
               variant="outlined"
               inputProps={{ style: { fontSize: 16 } }}
@@ -164,13 +194,41 @@ export function AddFeedModal({ open, close, edit, id }) {
             />
             <MUI.TextField
               id="quantityFeed"
-              label="Quantity Feed"
+              label="Кількість корму"
               value={quantityFeed}
               multiline
               inputProps={{ style: { fontSize: 16 } }}
               InputLabelProps={{ style: { fontSize: 12 } }}
               onChange={handleChange}
             />
+            <MUI.TextField
+              id="quantityBags"
+              label="Кількість мішків"
+              value={quantityBags}
+              multiline
+              inputProps={{ style: { fontSize: 16 } }}
+              InputLabelProps={{ style: { fontSize: 12 } }}
+              onChange={handleChange}
+            />
+            <MUI.TextField
+              // disabled
+              id="FeedSuma"
+              label="Сума"
+              defaultValue="0"
+              value={FeedSuma}
+              onChange={handleChange}
+            />
+            {/* <MUI.TextField
+              id="FeedSuma"
+              label="Сума"
+              value={FeedSuma}
+              variant="outlined-read-only-input"
+              //   slotProps={{
+              // input: {
+              //   readOnly: true,
+              // },}}
+              // onChange={handleChange}
+            /> */}
             <div className={RBCSS.modalButtons}>
               <MUI.Button
                 variant="outlined"
@@ -187,7 +245,7 @@ export function AddFeedModal({ open, close, edit, id }) {
             </div>
           </form>
         </div>
-      </Modal>
+      </ModalWindows>
     </div>
   );
 }

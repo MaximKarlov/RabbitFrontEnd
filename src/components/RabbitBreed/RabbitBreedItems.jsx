@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import * as MUI from '@mui/material';
-import * as MuiIcon from '@mui/icons-material/';
+import * as MuiIcon from '@mui/icons-material';
 import {
   deleteRabbitBreed,
   fetchRabbitsBreed,
@@ -23,7 +23,6 @@ export default function RabbitBreedItems({ BreedList }) {
   };
 
   const openClick = e => {
-    // console.dir('openClick', e);
     const breedID = e.target.getAttribute('id');
     setEditBreed(true);
     setBreedId(breedID);

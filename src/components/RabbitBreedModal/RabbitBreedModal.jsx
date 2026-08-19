@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import { styled } from '@mui/system';
-import { Modal as BaseModal } from '@mui/base/Modal';
+import Modal from '@mui/material/Modal';
 import RBCSS from './RabbitBreedModal.module.css';
 import * as MUI from '@mui/material';
 import {
@@ -12,7 +12,7 @@ import {
   fetchRabbitsBreed,
   findCurrentBreedById,
   updateRabbitsBreed,
-} from '../../redux/rabbits/rabbitsOperation';
+} from '../../redux/rabbits/rabbitsOperation.js';
 
 const Backdrop = React.forwardRef((props, ref) => {
   const { open, className, ...other } = props;
@@ -30,7 +30,7 @@ Backdrop.propTypes = {
   open: PropTypes.bool,
 };
 
-const Modal = styled(BaseModal)`
+const ModalWindow = styled(Modal)`
   position: fixed;
   z-index: 1300;
   inset: 0;
@@ -117,7 +117,7 @@ export function RabbitBreedModal({ open, close, edit, id }) {
 
   return (
     <div>
-      <Modal
+      <ModalWindow
         aria-labelledby="unstyled-modal-title"
         aria-describedby="unstyled-modal-description"
         open={open}
@@ -170,7 +170,7 @@ export function RabbitBreedModal({ open, close, edit, id }) {
             </div>
           </form>
         </div>
-      </Modal>
+      </ModalWindow>
     </div>
   );
 }

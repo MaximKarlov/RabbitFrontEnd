@@ -1,11 +1,11 @@
 import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import * as MUI from '@mui/material/';
+import * as MUI from '@mui/material';
 import { GetRabbitBreedList } from '../AddRabbit/GetRabbitBreedList';
 import { RabbitGender } from '../AddRabbit/RabbitGender';
 import { RabbitMother } from '../AddRabbit/RabbitMother';
 import { RabbitFather } from '../AddRabbit/RabbitFather';
-import { addRabbit, fetchRabbits } from '../../redux/rabbits/rabbitsOperation';
+import { addRabbit, fetchRabbits } from '../../redux/rabbits/rabbitsOperation.js';
 
 const style = {
   position: 'absolute',

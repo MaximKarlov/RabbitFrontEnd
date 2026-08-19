@@ -2,8 +2,7 @@ import axios from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import Notiflix from 'notiflix';
 
-axios.defaults.baseURL = 'https://rabbitbackend.onrender.com';
-// axios.defaults.baseURL = 'http://localhost:3005';
+axios.defaults.baseURL = 'http://localhost:3005';
 
 
 const token = {
@@ -62,7 +61,7 @@ export const findCurrentFeedById = createAsyncThunk(
   'feeds/findCurrentFeedById',
   async (id, { rejectWithValue }) => {
     try {
-      const { data, status } = await axios.get(`/rabbits/breeds/${id}`);
+      const { data, status } = await axios.get(`/feeds/${id}`);
       if (status === 200) return data;
     } catch (err) {
       Notiflix.Notify.failure(err.message);
@@ -74,15 +73,13 @@ export const findCurrentFeedById = createAsyncThunk(
 export const updateFeed = createAsyncThunk(
   'feeds/updateFeed',
   async (objectsToSend, thunkAPI) => {
-    console.log('object', objectsToSend[1]);
-    console.log('id', objectsToSend[0]);
     const state = thunkAPI.getState();
     const persistToken = state.auth.token;
     token.set(persistToken);
 
     try {
       const { data, status } = await axios.put(
-        `/rabbits/breeds/${objectsToSend[0]}`,
+        `/feeds/${objectsToSend[0]}`,
         objectsToSend[1]
       );
       if (status === 200)
