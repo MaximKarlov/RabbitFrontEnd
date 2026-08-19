@@ -52,7 +52,7 @@ export default function FeedItems({ FeedsList }) {
           <MUI.TableBody>
             {FeedsList.map(
               row => (
-                (sum = sum + Number(row.suma)),
+                (sum = sum + Number(row.suma))
                 (
                   <MUI.TableRow
                     _id={row._id}
