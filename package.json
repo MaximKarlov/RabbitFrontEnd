@@ -38,7 +38,9 @@
     "redux-persist": "^6.0.0",
     "stream-browserify": "^3.0.0",
     "styled-components": "^5.3.11",
-    "web-vitals": "^2.1.3"
+    "watchpack": "^2.5.2",
+    "web-vitals": "^2.1.3",
+    "webpack": "^5.109.2"
   },
   "scripts": {
     "start": "react-scripts start",

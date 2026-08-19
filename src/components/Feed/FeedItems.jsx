@@ -10,9 +10,10 @@ import feedCss from './feed.module.css';
 export default function FeedItems({ FeedsList }) {
   const [editFeed, setEditFeed] = useState(false);
   const [feedId, setFeedId] = useState('');
+  // const [expence, setExpence] = useState(0);
   const dispatch = useDispatch();
   let counterID = 0;
-  let sum = 0;
+  let expence = 0;
 
 
   const deleteBreed = e => {
@@ -29,6 +30,12 @@ export default function FeedItems({ FeedsList }) {
   const closeClick = () => {
     setEditFeed(false);
   };
+
+  const expenceFunc = (price,quantity) =>{
+    const sum = price * quantity;
+    expence+=sum;
+    return sum;
+  }
 
   return (
     <div style={{ height: 400, width: '100%' }}>
@@ -50,52 +57,47 @@ export default function FeedItems({ FeedsList }) {
             </MUI.TableRow>
           </MUI.TableHead>
           <MUI.TableBody>
-            {FeedsList.map(
-              row => (
-                (sum = sum + Number(row.suma))
-                (
-                  <MUI.TableRow
-                    _id={row._id}
-                    key={row._id}
-                    sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+            {FeedsList.map(row => (
+              <MUI.TableRow
+                _id={row._id}
+                key={row._id}
+                sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+              >
+                <MUI.TableCell component="th" scope="row" align="center">
+                  {(counterID += 1)}
+                </MUI.TableCell>
+                <MUI.TableCell align="right">
+                  {dayjs(row.date).format('DD.MM.YYYY')}
+                </MUI.TableCell>
+                <MUI.TableCell align="right">{row.name}</MUI.TableCell>
+                <MUI.TableCell align="center">{row.bags}</MUI.TableCell>
+                <MUI.TableCell align="center">{row.quantity}</MUI.TableCell>
+                <MUI.TableCell align="center">{row.price}</MUI.TableCell>
+                <MUI.TableCell align="center">{expenceFunc(row.price,row.quantity)}</MUI.TableCell>
+                <MUI.TableCell align="center">
+                  <MUI.Button
+                    id={row._id}
+                    variant="outlined"
+                    startIcon={<MuiIcon.Edit />}
+                    type="text"
+                    onClick={openClick}
                   >
-                    <MUI.TableCell component="th" scope="row" align="center">
-                      {(counterID += 1)}
-                    </MUI.TableCell>
-                    <MUI.TableCell align="right">
-                      {dayjs(row.date).format('DD.MM.YYYY')}
-                    </MUI.TableCell>
-                    <MUI.TableCell align="right">{row.name}</MUI.TableCell>
-                    <MUI.TableCell align="center">{row.bags}</MUI.TableCell>
-                    <MUI.TableCell align="center">{row.quantity}</MUI.TableCell>
-                    <MUI.TableCell align="center">{row.price}</MUI.TableCell>
-                    <MUI.TableCell align="center">{row.suma}</MUI.TableCell>
-                    <MUI.TableCell align="center">
-                      <MUI.Button
-                        id={row._id}
-                        variant="outlined"
-                        startIcon={<MuiIcon.Edit />}
-                        type="text"
-                        onClick={openClick}
-                      >
-                        Edit
-                      </MUI.Button>
-                    </MUI.TableCell>
-                    <MUI.TableCell align="center">
-                      <MUI.Button
-                        id={row._id}
-                        variant="outlined"
-                        startIcon={<MuiIcon.Delete />}
-                        type="text"
-                        onClick={deleteBreed}
-                      >
-                        Delete
-                      </MUI.Button>
-                    </MUI.TableCell>
-                  </MUI.TableRow>
-                )
-              )
-            )}
+                    Edit
+                  </MUI.Button>
+                </MUI.TableCell>
+                <MUI.TableCell align="center">
+                  <MUI.Button
+                    id={row._id}
+                    variant="outlined"
+                    startIcon={<MuiIcon.Delete />}
+                    type="text"
+                    onClick={deleteBreed}
+                  >
+                    Delete
+                  </MUI.Button>
+                </MUI.TableCell>
+              </MUI.TableRow>
+            ))}
           </MUI.TableBody>
         </MUI.Table>
       </MUI.TableContainer>
@@ -111,7 +113,7 @@ export default function FeedItems({ FeedsList }) {
       )}
       <div className={feedCss.expence}>
         <span>Загальні витрати :</span>
-        <span className={feedCss.expenceSum}>{sum}</span>
+        <span className={feedCss.expenceSum}>{expence}</span>
       </div>
     </div>
   );

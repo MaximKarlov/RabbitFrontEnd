@@ -87,14 +87,14 @@ export function AddFeedModal({ open, close, edit, id }) {
 
       case 'quantityFeed':
         setQuantityFeed(event.target.value);
-          if (quantityBags !== '' & FeedSuma!=='') {
-            const tmp = (FeedSuma / event.target.value).toFixed(2)
+          if (FeedSuma!=='') {
+            const tmp = (Number(FeedSuma) / Number(event.target.value)).toFixed(2)
            setPriceFeed(tmp.toString());
           }
-          if(priceFeed!=='')
-          {
-            setFeedSuma(Math.round(priceFeed * event.target.value).toString());
-          }
+          // if(priceFeed!=='')
+          // {
+          //   setFeedSuma(Math.round(priceFeed * event.target.value).toString());
+          // }
       break;
 
       case 'quantityBags':
@@ -102,12 +102,14 @@ export function AddFeedModal({ open, close, edit, id }) {
         break;
 
       case 'FeedSuma':
+        // console.log('feedsumma', event.target.value);
         setFeedSuma(event.target.value);
-         if (priceFeed !== '') 
-          {
-          const tmp = (event.target.value / priceFeed);
-          setQuantityFeed(tmp.toString());
-          }
+        // console.log('quantityFeed', quantityFeed);
+
+            if(quantityFeed!==''){
+                const tmp = event.target.value / quantityFeed;
+                setPriceFeed(tmp.toString());
+            }
 
       break;
 
