@@ -80,9 +80,6 @@ export function AddFeedModal({ open, close, edit, id }) {
 
       case 'priceFeed':
         setPriceFeed(event.target.value);
-        // if (quantityFeed !== '') {
-        //   setFeedSuma(event.target.value * quantityFeed);
-        // }
         break;
 
       case 'quantityFeed':
@@ -91,10 +88,6 @@ export function AddFeedModal({ open, close, edit, id }) {
             const tmp = (Number(FeedSuma) / Number(event.target.value)).toFixed(2)
            setPriceFeed(tmp.toString());
           }
-          // if(priceFeed!=='')
-          // {
-          //   setFeedSuma(Math.round(priceFeed * event.target.value).toString());
-          // }
       break;
 
       case 'quantityBags':
@@ -102,10 +95,7 @@ export function AddFeedModal({ open, close, edit, id }) {
         break;
 
       case 'FeedSuma':
-        // console.log('feedsumma', event.target.value);
         setFeedSuma(event.target.value);
-        // console.log('quantityFeed', quantityFeed);
-
             if(quantityFeed!==''){
                 const tmp = event.target.value / quantityFeed;
                 setPriceFeed(tmp.toString());
